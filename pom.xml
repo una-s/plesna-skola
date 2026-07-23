@@ -20,7 +20,7 @@
     <modules>
         <module>zajednicki</module>
         <module>server</module>
-        <module>klijent</module>
+        <!-- <module>klijent</module> -->
     </modules>
 
 </project>
