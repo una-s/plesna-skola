@@ -1,0 +1,33 @@
+# Java build outputs
+*.class
+build/
+dist/
+bin/
+out/
+
+# NetBeans - lične postavke
+nbproject/private/
+nbbuild/
+nbdist/
+
+# Eclipse (za kasnije)
+.metadata/
+.settings/
+.classpath
+.project
+.factorypath
+.apt_generated/
+
+# Maven (za kasnije)
+target/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logovi
+*.log
+
+# IDE
+.idea/
+*.iml
