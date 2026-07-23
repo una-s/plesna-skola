@@ -1,33 +1,27 @@
-# Java build outputs
-*.class
-build/
-dist/
-bin/
-out/
-
-# NetBeans - lične postavke
-nbproject/private/
-nbbuild/
-nbdist/
-
-# Eclipse (za kasnije)
-.metadata/
+# Eclipse
 .settings/
 .classpath
 .project
 .factorypath
 .apt_generated/
 
-# Maven (za kasnije)
+# Maven
 target/
+
+# Java
+*.class
+bin/
+
+# NetBeans (nakon migracije)
+nbproject/
+build/
+dist/
+build.xml
+manifest.mf
 
 # OS
 Thumbs.db
 .DS_Store
 
-# Logovi
+# Logs
 *.log
-
-# IDE
-.idea/
-*.iml
