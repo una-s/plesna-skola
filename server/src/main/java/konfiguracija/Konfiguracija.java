@@ -23,7 +23,7 @@ public class Konfiguracija {
     private Konfiguracija(){
             konfiguracija=new Properties();
             try {
-                konfiguracija.load(new FileInputStream("C:\\Users\\Asus\\Desktop\\ps\\1_SEMINARSKI_SERVER\\config\\config.properties"));
+            	konfiguracija.load(new FileInputStream("config/config.properties"));
             } catch (IOException ex) {
                 ex.printStackTrace();
                 Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,7 +48,7 @@ public class Konfiguracija {
     
     public void sacuvajIzmene(){
         try {
-            konfiguracija.store(new FileOutputStream("C:\\Users\\Asus\\Desktop\\ps\\1_SEMINARSKI_SERVER\\config\\config.properties"),null);
+        	konfiguracija.store(new FileOutputStream("config/config.properties"), null);
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
