@@ -39,15 +39,19 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#hashCode()}.
 	 */
 	@Test
-	final void testHashCode() {
-		 assertEquals(3, u.hashCode());
+	void testHashCode() {
+	    u.setBrojTelefona("0641111111");
+	    
+	    Ucenik u2 = new Ucenik();
+	    u2.setBrojTelefona("0641111111");
+	    
+	    assertEquals(u.hashCode(), u2.hashCode());
 	}
-
 	/**
 	 * Test method for {@link domen.Ucenik#Ucenik()}.
 	 */
 	@Test
-	final void testUcenik() {
+	 void testUcenik() {
 		assertNotNull(u);
 	}
 
@@ -55,7 +59,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#Ucenik(java.lang.Long, java.lang.String, java.lang.String, java.lang.String, domen.PlesniNivo)}.
 	 */
 	@Test
-	final void testUcenikLongStringStringStringPlesniNivo() {
+	 void testUcenikLongStringStringStringPlesniNivo() {
 		 PlesniNivo pn = new PlesniNivo();
 		    Ucenik ucenik = new Ucenik(1L, "Ivo", "Ivic", "0641234567", pn);
 		    
@@ -70,7 +74,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#setIdUcenik(java.lang.Long)}.
 	 */
 	@Test
-	final void testSetIdUcenik() {
+	 void testSetIdUcenik() {
 		 u.setIdUcenik(5L);
 		 assertEquals(5L, u.getIdUcenik());
 	}
@@ -79,7 +83,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#setIme(java.lang.String)}.
 	 */
 	@Test
-	final void testSetIme() {
+	 void testSetIme() {
 		u.setIme("Marko");
 	    assertEquals("Marko", u.getIme());
 	}
@@ -88,7 +92,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#setPrezime(java.lang.String)}.
 	 */
 	@Test
-	final void testSetPrezime() {
+	 void testSetPrezime() {
 		u.setPrezime("Markovic");
 	    assertEquals("Markovic", u.getPrezime());
 	}
@@ -97,7 +101,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#setBrojTelefona(java.lang.String)}.
 	 */
 	@Test
-	final void testSetBrojTelefona() {
+	 void testSetBrojTelefona() {
 		u.setBrojTelefona("0653334444");
 	    assertEquals("0653334444", u.getBrojTelefona());
 	}
@@ -106,7 +110,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#setPlesniNivo(domen.PlesniNivo)}.
 	 */
 	@Test
-	final void testSetPlesniNivo() {
+	 void testSetPlesniNivo() {
 		PlesniNivo pn = new PlesniNivo();
 	    u.setPlesniNivo(pn);
 	    assertEquals(pn, u.getPlesniNivo());
@@ -116,7 +120,7 @@ class UcenikTest {
 	 * Test method for {@link domen.Ucenik#toString()}.
 	 */
 	@Test
-	final void testToString() {
+	 void testToString() {
 		u.setIme("Ivo");
 	    u.setPrezime("Ivic");
 	    
@@ -134,7 +138,7 @@ class UcenikTest {
 	    "0641111111, 0641111111, true",
 	    "0641111111, 0642222222, false"
 	})
-	final void testEqualsObject(String tel1, String tel2, boolean ocekivano) {
+	 void testEqualsObject(String tel1, String tel2, boolean ocekivano) {
 		u.setBrojTelefona(tel1);
 	    
 	    Ucenik u2 = new Ucenik();

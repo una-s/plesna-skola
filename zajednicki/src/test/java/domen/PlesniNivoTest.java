@@ -39,15 +39,21 @@ class PlesniNivoTest {
 	 * Test method for {@link domen.PlesniNivo#hashCode()}.
 	 */
 	@Test
-	final void testHashCode() {
-		assertEquals(7, pn.hashCode());
+	void testHashCode() {
+	    pn.setOpis("Pocetni");
+	    pn.setNivo(1);
+	    
+	    PlesniNivo pn2 = new PlesniNivo();
+	    pn2.setOpis("Pocetni");
+	    pn2.setNivo(1);
+	    
+	    assertEquals(pn.hashCode(), pn2.hashCode());
 	}
-
 	/**
 	 * Test method for {@link domen.PlesniNivo#PlesniNivo(java.lang.Long, java.lang.String, int)}.
 	 */
 	@Test
-	final void testPlesniNivoLongStringInt() {
+	 void testPlesniNivoLongStringInt() {
 		 PlesniNivo p = new PlesniNivo(1L, "Pocetni", 1);
 
 	        assertEquals(1L, p.getIdPlesniNivo());
@@ -59,7 +65,7 @@ class PlesniNivoTest {
 	 * Test method for {@link domen.PlesniNivo#setIdPlesniNivo(java.lang.Long)}.
 	 */
 	@Test
-	final void testSetIdPlesniNivo() {
+	 void testSetIdPlesniNivo() {
 		 pn.setIdPlesniNivo(5L);
 	     assertEquals(5L, pn.getIdPlesniNivo());
 	}
@@ -68,7 +74,7 @@ class PlesniNivoTest {
 	 * Test method for {@link domen.PlesniNivo#setOpis(java.lang.String)}.
 	 */
 	@Test
-	final void testSetOpis() {
+	 void testSetOpis() {
 		 pn.setOpis("Napredni");
 	     assertEquals("Napredni", pn.getOpis());
 	}
@@ -77,7 +83,7 @@ class PlesniNivoTest {
 	 * Test method for {@link domen.PlesniNivo#setNivo(int)}.
 	 */
 	@Test
-	final void testSetNivo() {
+	 void testSetNivo() {
 		 pn.setNivo(3);
 	     assertEquals(3, pn.getNivo());
 	}
@@ -86,7 +92,7 @@ class PlesniNivoTest {
 	 * Test method for {@link domen.PlesniNivo#toString()}.
 	 */
 	@Test
-	final void testToString() {
+	 void testToString() {
 		pn.setOpis("Srednji");
         pn.setNivo(2);
 
@@ -103,7 +109,7 @@ class PlesniNivoTest {
 	        "Pocetni, 1, Napredni, 1, false",
 	        "Pocetni, 1, Pocetni, 2, false"
 	    })
-	final void testEqualsObject(String opis1, int nivo1, String opis2, int nivo2, boolean ocekivano) {
+	 void testEqualsObject(String opis1, int nivo1, String opis2, int nivo2, boolean ocekivano) {
 		pn.setOpis(opis1);
         pn.setNivo(nivo1);
 
