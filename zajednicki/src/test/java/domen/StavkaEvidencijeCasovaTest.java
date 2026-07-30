@@ -187,4 +187,60 @@ class StavkaEvidencijeCasovaTest {
 		assertFalse(stavka.equals(new Ucenik()));
 	}
 
+	@Test
+	void testUslovZaSelectPoEvidenciji() {
+		EvidencijaCasova ev = new EvidencijaCasova();
+		ev.setIdEvidencijaCasova(4L);
+		stavka.setEvidencijaCasova(ev);
+
+		assertEquals("se.evidencija_casova = 4", stavka.uslovZaSelect());
+	}
+
+	@Test
+	void testUslovZaSelectPrazno() {
+		assertEquals("", stavka.uslovZaSelect());
+	}
+
+	@Test
+	void testVratiVrednostZaUbacivanje() {
+		EvidencijaCasova ev = new EvidencijaCasova();
+		ev.setIdEvidencijaCasova(4L);
+		Cas c = new Cas(2L, "Salsa", 60, "Latino");
+
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(2026, java.util.Calendar.JANUARY, 15, 0, 0, 0);
+		Date datum = cal.getTime();
+
+		StavkaEvidencijeCasova s = new StavkaEvidencijeCasova(ev, 1L, 5, datum, "Odlicno", c);
+
+		assertEquals("'2026-01-15', 5, 'Odlicno', 4, 2", s.vratiVrednostZaUbacivanje());
+	}
+
+	@Test
+	void testVratiVrednostZaIzmenu() {
+		Cas c = new Cas(2L, "Salsa", 60, "Latino");
+
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(2026, java.util.Calendar.JANUARY, 15, 0, 0, 0);
+		Date datum = cal.getTime();
+
+		stavka.setDatumPrisustva(datum);
+		stavka.setOcena(5);
+		stavka.setNapomena("Odlicno");
+		stavka.setCas(c);
+
+		assertEquals("datumPrisustva = '2026-01-15', ocena = 5, napomena = 'Odlicno', cas = 2",
+				stavka.vratiVrednostZaIzmenu());
+	}
+
+	@Test
+	void testVratiPrimarniKljuc() {
+		EvidencijaCasova ev = new EvidencijaCasova();
+		ev.setIdEvidencijaCasova(4L);
+		stavka.setRb(1L);
+		stavka.setEvidencijaCasova(ev);
+
+		assertEquals("rb = 1 AND evidencija_casova = 4", stavka.vratiPrimarniKljuc());
+	}
+
 }
