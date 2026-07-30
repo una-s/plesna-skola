@@ -163,4 +163,31 @@ class PrSTest {
 		assertFalse(prs.equals(new Ucenik()));
 	}
 
+	@Test
+	void testVratiVrednostZaUbacivanje() {
+		Profesor prof = new Profesor(3L, "Ana", "Anic", "064", "aanic", "sifra");
+		Sertifikat sert = new Sertifikat(5L, "Centar za Savremenu Igru", "Salsa instruktor");
+
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(2026, java.util.Calendar.JANUARY, 15, 0, 0, 0);
+		Date datum = cal.getTime();
+
+		PrS p = new PrS(datum, prof, sert);
+
+		assertEquals("3, 5, '2026-01-15'", p.vratiVrednostZaUbacivanje());
+	}
+
+	@Test
+	void testVratiVrednostZaIzmenu() {
+		Profesor prof = new Profesor(3L, "Ana", "Anic", "064", "aanic", "sifra");
+		Sertifikat sert = new Sertifikat(5L, "Centar za Savremenu Igru", "Salsa instruktor");
+
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(2026, java.util.Calendar.JANUARY, 15, 0, 0, 0);
+		Date datum = cal.getTime();
+
+		PrS p = new PrS(datum, prof, sert);
+
+		assertEquals("profesor = 3, sertifikat = 5, datumIzdavanja = '2026-01-15'", p.vratiVrednostZaIzmenu());
+	}
 }
