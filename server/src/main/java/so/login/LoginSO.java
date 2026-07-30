@@ -6,6 +6,7 @@ package so.login;
 
 import domen.ApstraktniDomenskiObjekat;
 import domen.Profesor;
+import repository.Repository;
 import so.ApstraktnaSO;
 
 /**
@@ -15,34 +16,42 @@ import so.ApstraktnaSO;
 
 public class LoginSO extends ApstraktnaSO {
 
-    private Profesor ulogovani;
+	private Profesor ulogovani;
 
-    public Profesor getUlogovani() {
-        return ulogovani;
-    }
+	public LoginSO() {
+		super();
+	}
 
-    @Override
-    protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
-        if (ado == null || !(ado instanceof Profesor)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase Profesor!");
-        }
-        
-        Profesor pr = (Profesor) ado;
-        if (pr.getKorisnickoIme()== null || pr.getKorisnickoIme().isEmpty()) {
-            throw new Exception("Korisnicko ime ne moze biti prazno!");
-        }
-        if (pr.getSifra()== null || pr.getSifra().isEmpty()) {
-            throw new Exception("Sifra ne moze biti prazna!");
-        }
-    }
+	public LoginSO(Repository repository) {
+		super(repository);
+	}
 
-    @Override
-    protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
-        Profesor pr = (Profesor) ado;
-        ulogovani =   (Profesor) repository.get(pr);
-        
-        if(ulogovani == null){
-            throw new Exception("Korisnicko ime i sifra nisu ispravni!");
-        }
-    }
+	public Profesor getUlogovani() {
+		return ulogovani;
+	}
+
+	@Override
+	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
+		if (ado == null || !(ado instanceof Profesor)) {
+			throw new Exception("Prosledjeni objekat nije instanca klase Profesor!");
+		}
+
+		Profesor pr = (Profesor) ado;
+		if (pr.getKorisnickoIme() == null || pr.getKorisnickoIme().isEmpty()) {
+			throw new Exception("Korisnicko ime ne moze biti prazno!");
+		}
+		if (pr.getSifra() == null || pr.getSifra().isEmpty()) {
+			throw new Exception("Sifra ne moze biti prazna!");
+		}
+	}
+
+	@Override
+	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+		Profesor pr = (Profesor) ado;
+		ulogovani = (Profesor) repository.get(pr);
+
+		if (ulogovani == null) {
+			throw new Exception("Korisnicko ime i sifra nisu ispravni!");
+		}
+	}
 }
