@@ -235,4 +235,49 @@ class EvidencijaCasovaTest {
 		assertFalse(ec.equals(new Ucenik()));
 	}
 
+	@Test
+	void testUslovZaSelectPoId() {
+		ec.setIdEvidencijaCasova(5L);
+		assertEquals("ec.idEvidencijaCasova = 5", ec.uslovZaSelect());
+	}
+
+	@Test
+	void testUslovZaSelectPoProfesoru() {
+		Profesor prof = new Profesor(3L, "Ana", "Anic", "064", "aanic", "sifra");
+		ec.setProfesor(prof);
+		assertEquals("ec.profesor = 3", ec.uslovZaSelect());
+	}
+
+	@Test
+	void testUslovZaSelectProfesorIUcenik() {
+		Profesor prof = new Profesor(3L, "Ana", "Anic", "064", "aanic", "sifra");
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
+		Ucenik uc = new Ucenik(7L, "Marko", "Markovic", "065", pn);
+		ec.setProfesor(prof);
+		ec.setUcenik(uc);
+		assertEquals("ec.profesor = 3 AND ec.ucenik = 7", ec.uslovZaSelect());
+	}
+
+	@Test
+	void testUslovZaSelectSvaTriKriterijuma() {
+		Profesor prof = new Profesor(3L, "Ana", "Anic", "064", "aanic", "sifra");
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
+		Ucenik uc = new Ucenik(7L, "Marko", "Markovic", "065", pn);
+		ec.setProfesor(prof);
+		ec.setUcenik(uc);
+		ec.setSkolskaGodina("2025/2026");
+		assertEquals("ec.profesor = 3 AND ec.ucenik = 7 AND ec.skolskaGodina = '2025/2026'", ec.uslovZaSelect());
+	}
+
+	@Test
+	void testUslovZaSelectPrazno() {
+		assertEquals("", ec.uslovZaSelect());
+	}
+
+	@Test
+	void testVratiPrimarniKljuc() {
+		ec.setIdEvidencijaCasova(5L);
+		assertEquals("idEvidencijaCasova = 5", ec.vratiPrimarniKljuc());
+	}
+
 }
