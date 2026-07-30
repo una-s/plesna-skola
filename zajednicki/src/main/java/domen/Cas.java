@@ -69,10 +69,9 @@ public class Cas implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return Objects.hash(naziv, stilPlesa);
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
