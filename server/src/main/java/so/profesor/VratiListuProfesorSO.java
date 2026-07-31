@@ -5,6 +5,7 @@
 package so.profesor;
 
 import domen.ApstraktniDomenskiObjekat;
+import repository.Repository;
 import domen.Profesor;
 import java.util.List;
 import so.ApstraktnaSO;
@@ -16,26 +17,34 @@ import so.ApstraktnaSO;
 
 public class VratiListuProfesorSO extends ApstraktnaSO {
 
-    private List<Profesor> profesori;
+	private List<Profesor> profesori;
 
-    public List<Profesor> getProfesori() {
-        return profesori;
-    }
+	public List<Profesor> getProfesori() {
+		return profesori;
+	}
 
-    @Override
-    protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
-        if (!(ado instanceof Profesor)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase Profesor!");
-        }
-    }
+	public VratiListuProfesorSO() {
+		super();
+	}
 
-    @Override
-    protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
-        Profesor pr = (Profesor) ado;
-        profesori = (List<Profesor>) repository.getAll(pr);
+	public VratiListuProfesorSO(Repository repository) {
+		super(repository);
+	}
 
-        if (profesori == null) {
-            throw new Exception("Zaposleni nisu vraceni!");
-        }
-    }
+	@Override
+	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
+		if (!(ado instanceof Profesor)) {
+			throw new Exception("Prosledjeni objekat nije instanca klase Profesor!");
+		}
+	}
+
+	@Override
+	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+		Profesor pr = (Profesor) ado;
+		profesori = (List<Profesor>) repository.getAll(pr);
+
+		if (profesori == null) {
+			throw new Exception("Zaposleni nisu vraceni!");
+		}
+	}
 }
