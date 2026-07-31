@@ -7,6 +7,8 @@ package so.ucenik;
 import domen.ApstraktniDomenskiObjekat;
 import domen.Ucenik;
 import so.ApstraktnaSO;
+import repository.Repository;
+
 /**
  * 
  * @author Una
@@ -14,16 +16,24 @@ import so.ApstraktnaSO;
 
 public class ObrisiUcenikSO extends ApstraktnaSO {
 
-    @Override
-    protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
-        if (!(ado instanceof Ucenik)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase Ucenik!");
-        }
-    }
+	public ObrisiUcenikSO() {
+		super();
+	}
 
-    @Override
-    protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
-        Ucenik u = (Ucenik) ado;
-        repository.delete(u);
-    }
+	public ObrisiUcenikSO(Repository repository) {
+		super(repository);
+	}
+
+	@Override
+	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
+		if (!(ado instanceof Ucenik)) {
+			throw new Exception("Prosledjeni objekat nije instanca klase Ucenik!");
+		}
+	}
+
+	@Override
+	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+		Ucenik u = (Ucenik) ado;
+		repository.delete(u);
+	}
 }
