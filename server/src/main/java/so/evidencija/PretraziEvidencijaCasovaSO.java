@@ -8,6 +8,8 @@ import domen.ApstraktniDomenskiObjekat;
 import domen.EvidencijaCasova;
 import java.util.List;
 import so.ApstraktnaSO;
+import repository.Repository;
+
 /**
  * 
  * @author Una
@@ -15,32 +17,41 @@ import so.ApstraktnaSO;
 
 public class PretraziEvidencijaCasovaSO extends ApstraktnaSO {
 
-    private List<EvidencijaCasova> evidencije;
+	private List<EvidencijaCasova> evidencije;
 
-    public List<EvidencijaCasova> getEvidencije() {
-        return evidencije;
-    }
+	public List<EvidencijaCasova> getEvidencije() {
+		return evidencije;
+	}
 
-    @Override
-    protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
-         if (!(ado instanceof EvidencijaCasova)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase EvidencijaCasova!");
-        }
+	public PretraziEvidencijaCasovaSO() {
+		super();
+	}
 
-        EvidencijaCasova ev = (EvidencijaCasova) ado;
+	public PretraziEvidencijaCasovaSO(Repository repository) {
+		super(repository);
+	}
 
-        if (ev.getProfesor()== null && ev.getUcenik()== null && (ev.getSkolskaGodina() == null || ev.getSkolskaGodina().isEmpty())) {
-            throw new Exception("Morate uneti bar jedan kriterijum pretrage!");
-        }
-    }
+	@Override
+	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
+		if (!(ado instanceof EvidencijaCasova)) {
+			throw new Exception("Prosledjeni objekat nije instanca klase EvidencijaCasova!");
+		}
 
-    @Override
-    protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
-        EvidencijaCasova ev = (EvidencijaCasova) ado;
-        evidencije = repository.getAll(ev);
-        
-        if (evidencije.isEmpty()) {
-            throw new Exception("Sistem ne moze da nadje evidencije casova po zadatim kriterijumima!");
-        }
-    }
+		EvidencijaCasova ev = (EvidencijaCasova) ado;
+
+		if (ev.getProfesor() == null && ev.getUcenik() == null
+				&& (ev.getSkolskaGodina() == null || ev.getSkolskaGodina().isEmpty())) {
+			throw new Exception("Morate uneti bar jedan kriterijum pretrage!");
+		}
+	}
+
+	@Override
+	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+		EvidencijaCasova ev = (EvidencijaCasova) ado;
+		evidencije = repository.getAll(ev);
+
+		if (evidencije.isEmpty()) {
+			throw new Exception("Sistem ne moze da nadje evidencije casova po zadatim kriterijumima!");
+		}
+	}
 }
