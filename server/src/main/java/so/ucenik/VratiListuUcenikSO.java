@@ -6,6 +6,8 @@ package so.ucenik;
 
 import domen.ApstraktniDomenskiObjekat;
 import domen.Ucenik;
+import repository.Repository;
+
 import java.util.List;
 import so.ApstraktnaSO;
 /**
@@ -16,6 +18,14 @@ import so.ApstraktnaSO;
 public class VratiListuUcenikSO extends ApstraktnaSO {
 
     private List<Ucenik> ucenici;
+    
+    public VratiListuUcenikSO() {
+        super();
+    }
+
+    public VratiListuUcenikSO(Repository repository) {
+        super(repository);
+    }
 
     public List<Ucenik> getUcenici() {
         return ucenici;

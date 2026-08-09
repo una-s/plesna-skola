@@ -75,8 +75,7 @@ public class Ucenik implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return Objects.hash(brojTelefona);
     }
 
     @Override

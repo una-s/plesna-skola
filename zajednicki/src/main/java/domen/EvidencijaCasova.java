@@ -124,8 +124,7 @@ public class EvidencijaCasova implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+    	return Objects.hash(idEvidencijaCasova);
     }
 
     @Override
@@ -140,7 +139,7 @@ public class EvidencijaCasova implements ApstraktniDomenskiObjekat {
             return false;
         }
         final EvidencijaCasova other = (EvidencijaCasova) obj;
-        return this.idEvidencijaCasova == other.idEvidencijaCasova;
+        return Objects.equals(this.idEvidencijaCasova, other.idEvidencijaCasova);
     }
 
     @Override

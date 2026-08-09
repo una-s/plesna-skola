@@ -50,8 +50,7 @@ public class Sertifikat implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        return hash;
+        return Objects.hash(institucija, naziv);
     }
 
     @Override

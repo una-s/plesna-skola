@@ -14,41 +14,45 @@ import repository.db.impl.DbRepositoryGeneric;
  * @author Una
  */
 public abstract class ApstraktnaSO {
-    protected final Repository repository;
+	protected final Repository repository;
 
-    public ApstraktnaSO() {
-        this.repository = new DbRepositoryGeneric();
-    }
+	public ApstraktnaSO() {
+		 this.repository = new DbRepositoryGeneric(); 
+	}
 
-    public void izvrsi(ApstraktniDomenskiObjekat ado) throws Exception {
-        try {
-            preduslov(ado);
-            zapocniTransakciju();
-            izvrsiOperaciju(ado);
-            potvrdiTransakciju();
-            System.out.println("Uspesno izvrsena operacija!");
-        } catch (Exception ex) {
-            System.out.println("Neuspesno izvrsena operacija!");
-            ponistiTransakciju();
-            throw ex;
-        } finally {
-            ((DbRepository) repository).disconnect();
-        }
-    }
+	public ApstraktnaSO(Repository repository) {
+		this.repository = repository;
+	}
 
-    protected abstract void preduslov(ApstraktniDomenskiObjekat ado) throws Exception;
+	public void izvrsi(ApstraktniDomenskiObjekat ado) throws Exception {
+		try {
+			preduslov(ado);
+			zapocniTransakciju();
+			izvrsiOperaciju(ado);
+			potvrdiTransakciju();
+			System.out.println("Uspesno izvrsena operacija!");
+		} catch (Exception ex) {
+			System.out.println("Neuspesno izvrsena operacija!");
+			ponistiTransakciju();
+			throw ex;
+		} finally {
+			((DbRepository) repository).disconnect();
+		}
+	}
 
-    protected abstract void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception;
+	protected abstract void preduslov(ApstraktniDomenskiObjekat ado) throws Exception;
 
-    private void zapocniTransakciju() throws Exception {
-        ((DbRepository) repository).connect();
-    }
+	protected abstract void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception;
 
-    protected void potvrdiTransakciju() throws Exception {
-        ((DbRepository) repository).commit();
-    }
+	private void zapocniTransakciju() throws Exception {
+		((DbRepository) repository).connect();
+	}
 
-    protected void ponistiTransakciju() throws Exception {
-        ((DbRepository) repository).rollback();
-    }
+	protected void potvrdiTransakciju() throws Exception {
+		((DbRepository) repository).commit();
+	}
+
+	protected void ponistiTransakciju() throws Exception {
+		((DbRepository) repository).rollback();
+	}
 }

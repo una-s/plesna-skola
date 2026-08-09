@@ -56,8 +56,7 @@ public class PrS implements ApstraktniDomenskiObjekat {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+        return Objects.hash(datumIzdavanja, profesor, sertifikat);
     }
 
     @Override

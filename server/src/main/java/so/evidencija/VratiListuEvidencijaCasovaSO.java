@@ -8,6 +8,8 @@ import domen.ApstraktniDomenskiObjekat;
 import domen.EvidencijaCasova;
 import java.util.List;
 import so.ApstraktnaSO;
+import repository.Repository;
+
 /**
  * 
  * @author Una
@@ -15,26 +17,34 @@ import so.ApstraktnaSO;
 
 public class VratiListuEvidencijaCasovaSO extends ApstraktnaSO {
 
-    private List<EvidencijaCasova> evidencije;
+	private List<EvidencijaCasova> evidencije;
 
-    public List<EvidencijaCasova> getEvidencije() {
-        return evidencije;
-    }
+	public List<EvidencijaCasova> getEvidencije() {
+		return evidencije;
+	}
 
-    @Override
-    protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
-        if (ado == null || !(ado instanceof EvidencijaCasova)) {
-            throw new Exception("Prosledjeni objekat nije instanca klase EvidencijeCasova!");
-        }
-    }
+	public VratiListuEvidencijaCasovaSO() {
+		super();
+	}
 
-    @Override
-    protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
-        EvidencijaCasova ev = (EvidencijaCasova) ado;
-        evidencije = repository.getAll(ev);
-        
-        if(evidencije.isEmpty()){
-            System.out.println("Nema evidencije casova!");
-        }
-    }
+	public VratiListuEvidencijaCasovaSO(Repository repository) {
+		super(repository);
+	}
+
+	@Override
+	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
+		if (ado == null || !(ado instanceof EvidencijaCasova)) {
+			throw new Exception("Prosledjeni objekat nije instanca klase EvidencijeCasova!");
+		}
+	}
+
+	@Override
+	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
+		EvidencijaCasova ev = (EvidencijaCasova) ado;
+		evidencije = repository.getAll(ev);
+
+		if (evidencije.isEmpty()) {
+			System.out.println("Nema evidencije casova!");
+		}
+	}
 }
