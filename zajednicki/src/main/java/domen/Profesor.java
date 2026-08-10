@@ -5,18 +5,65 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Predstavlja profesora u plesnoj skoli.
+ * 
+ * Svaki profesor ima ime, prezime, broj telefona, korisnicko ime i sifru
+ * koji se koriste za prijavljivanje na sistem.
+ * 
+ * Implementira ApstraktniDomenskiObjekat za rad sa tabelom "profesor"
+ * u bazi podataka.
+ * 
+ * @author Una Stankovic
+ */
 public class Profesor implements ApstraktniDomenskiObjekat {
 
+    /**
+     * Jedinstveni identifikator profesora kao Long.
+     */
     private Long idProfesor;
+
+    /**
+     * Ime profesora kao String.
+     */
     private String ime;
+
+    /**
+     * Prezime profesora kao String.
+     */
     private String prezime;
+
+    /**
+     * Broj telefona profesora kao String.
+     */
     private String brojTelefona;
+
+    /**
+     * Korisnicko ime profesora za prijavljivanje na sistem kao String.
+     */
     private String korisnickoIme;
+
+    /**
+     * Sifra profesora za prijavljivanje na sistem kao String.
+     */
     private String sifra;
 
+    /**
+     * Kreira objekat klase Profesor sa podrazumevanim (null) vrednostima.
+     */
     public Profesor() {
     }
 
+    /**
+     * Kreira objekat klase Profesor sa zadatim vrednostima.
+     * 
+     * @param idProfesor Jedinstveni identifikator profesora.
+     * @param ime Ime profesora.
+     * @param prezime Prezime profesora.
+     * @param brojTelefona Broj telefona profesora.
+     * @param korisnickoIme Korisnicko ime za prijavljivanje.
+     * @param sifra Sifra za prijavljivanje.
+     */
     public Profesor(Long idProfesor, String ime, String prezime, String brojTelefona, String korisnickoIme, String sifra) {
         this.idProfesor = idProfesor;
         this.ime = ime;
@@ -26,64 +73,146 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         this.sifra = sifra;
     }
 
+    /**
+     * Vraca identifikator profesora.
+     * 
+     * @return idProfesor kao Long.
+     */
     public Long getIdProfesor() {
         return idProfesor;
     }
 
+    /**
+     * Postavlja identifikator profesora na unetu vrednost.
+     * 
+     * @param idProfesor Novi identifikator profesora.
+     */
     public void setIdProfesor(Long idProfesor) {
         this.idProfesor = idProfesor;
     }
 
+    /**
+     * Vraca ime profesora.
+     * 
+     * @return ime profesora kao String.
+     */
     public String getIme() {
         return ime;
     }
 
+    /**
+     * Postavlja ime profesora na unetu vrednost.
+     * 
+     * @param ime Novo ime profesora.
+     */
     public void setIme(String ime) {
         this.ime = ime;
     }
 
+    /**
+     * Vraca prezime profesora.
+     * 
+     * @return prezime profesora kao String.
+     */
     public String getPrezime() {
         return prezime;
     }
 
+    /**
+     * Postavlja prezime profesora na unetu vrednost.
+     * 
+     * @param prezime Novo prezime profesora.
+     */
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
 
+    /**
+     * Vraca broj telefona profesora.
+     * 
+     * @return brojTelefona kao String.
+     */
     public String getBrojTelefona() {
         return brojTelefona;
     }
 
+    /**
+     * Postavlja broj telefona profesora na unetu vrednost.
+     * 
+     * @param brojTelefona Novi broj telefona profesora.
+     */
     public void setBrojTelefona(String brojTelefona) {
         this.brojTelefona = brojTelefona;
     }
 
+    /**
+     * Vraca korisnicko ime profesora.
+     * 
+     * @return korisnickoIme kao String.
+     */
     public String getKorisnickoIme() {
         return korisnickoIme;
     }
 
+    /**
+     * Postavlja korisnicko ime profesora na unetu vrednost.
+     * 
+     * @param korisnickoIme Novo korisnicko ime profesora.
+     */
     public void setKorisnickoIme(String korisnickoIme) {
         this.korisnickoIme = korisnickoIme;
     }
 
+    /**
+     * Vraca sifru profesora.
+     * 
+     * @return sifra kao String.
+     */
     public String getSifra() {
         return sifra;
     }
 
+    /**
+     * Postavlja sifru profesora na unetu vrednost.
+     * 
+     * @param sifra Nova sifra profesora.
+     */
     public void setSifra(String sifra) {
         this.sifra = sifra;
     }
 
+    /**
+     * Vraca String reprezentaciju profesora (ime i prezime).
+     * 
+     * @return ime i prezime profesora u formatu "ime prezime".
+     */
     @Override
     public String toString() {
         return ime + " " + prezime;
     }
 
+    /**
+     * Vraca hash kod profesora izracunat na osnovu korisnickog imena i sifre.
+     * 
+     * @return hash kod kao ceo broj.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(korisnickoIme, sifra);
     }
 
+    /**
+     * Poredi dva profesora po korisnickom imenu i sifri.
+     * 
+     * @param obj Drugi objekat sa kojim se poredi.
+     * @return 
+     * <ul>
+     * <li><b>true</b> - ako su oba objekta klase Profesor sa istim
+     * korisnickim imenom i sifrom ili ako su na istoj adresi.</li>
+     * <li><b>false</b> - ako je drugi objekat null, ako je druge klase
+     * ili ako nemaju isto korisnicko ime i sifru.</li>
+     * </ul>
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -117,6 +246,15 @@ public class Profesor implements ApstraktniDomenskiObjekat {
         return "";
     }
 
+    /**
+     * Vraca uslov za pretragu profesora na osnovu korisnickog imena i sifre.
+     * 
+     * Uslov se gradi od popunjenih polja - korisnickog imena i sifre,
+     * sa tacnim poklapanjem (koristi se prilikom prijavljivanja na sistem).
+     * 
+     * @return uslov za pretragu kao String ili prazan String ako
+     * nijedno polje nije popunjeno.
+     */
     @Override
     public String uslovZaSelect() {
         StringBuilder sb = new StringBuilder();
