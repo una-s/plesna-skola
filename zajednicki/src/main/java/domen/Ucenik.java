@@ -6,20 +6,57 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
- * @author Una
+ * Predstavlja ucenika plesne skole.
+ * 
+ * Svaki ucenik ima ime, prezime, broj telefona i plesni nivo koji pohadja.
+ * 
+ * Implementira ApstraktniDomenskiObjekat za rad sa tabelom "ucenik"
+ * u bazi podataka.
+ * 
+ * @author Una Stankovic
  */
 public class Ucenik implements ApstraktniDomenskiObjekat {
 
+    /**
+     * Jedinstveni identifikator ucenika kao Long.
+     */
     private Long idUcenik;
+
+    /**
+     * Ime ucenika kao String.
+     */
     private String ime;
+
+    /**
+     * Prezime ucenika kao String.
+     */
     private String prezime;
+
+    /**
+     * Broj telefona ucenika kao String.
+     */
     private String brojTelefona;
+
+    /**
+     * Plesni nivo koji ucenik pohadja.
+     */
     private PlesniNivo plesniNivo;
 
+    /**
+     * Kreira objekat klase Ucenik sa podrazumevanim (null) vrednostima.
+     */
     public Ucenik() {
     }
 
+    /**
+     * Kreira objekat klase Ucenik sa zadatim vrednostima.
+     * 
+     * @param idUcenik Jedinstveni identifikator ucenika.
+     * @param ime Ime ucenika.
+     * @param prezime Prezime ucenika.
+     * @param brojTelefona Broj telefona ucenika.
+     * @param plesniNivo Plesni nivo koji ucenik pohadja.
+     */
     public Ucenik(Long idUcenik, String ime, String prezime, String brojTelefona, PlesniNivo plesniNivo) {
         this.idUcenik = idUcenik;
         this.ime = ime;
@@ -28,56 +65,128 @@ public class Ucenik implements ApstraktniDomenskiObjekat {
         this.plesniNivo = plesniNivo;
     }
 
+    /**
+     * Vraca identifikator ucenika.
+     * 
+     * @return idUcenik kao Long.
+     */
     public Long getIdUcenik() {
         return idUcenik;
     }
 
+    /**
+     * Postavlja identifikator ucenika na unetu vrednost.
+     * 
+     * @param idUcenik Novi identifikator ucenika.
+     */
     public void setIdUcenik(Long idUcenik) {
         this.idUcenik = idUcenik;
     }
 
+    /**
+     * Vraca ime ucenika.
+     * 
+     * @return ime ucenika kao String.
+     */
     public String getIme() {
         return ime;
     }
 
+    /**
+     * Postavlja ime ucenika na unetu vrednost.
+     * 
+     * @param ime Novo ime ucenika.
+     */
     public void setIme(String ime) {
         this.ime = ime;
     }
 
+    /**
+     * Vraca prezime ucenika.
+     * 
+     * @return prezime ucenika kao String.
+     */
     public String getPrezime() {
         return prezime;
     }
 
+    /**
+     * Postavlja prezime ucenika na unetu vrednost.
+     * 
+     * @param prezime Novo prezime ucenika.
+     */
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
 
+    /**
+     * Vraca broj telefona ucenika.
+     * 
+     * @return brojTelefona kao String.
+     */
     public String getBrojTelefona() {
         return brojTelefona;
     }
 
+    /**
+     * Postavlja broj telefona ucenika na unetu vrednost.
+     * 
+     * @param brojTelefona Novi broj telefona ucenika.
+     */
     public void setBrojTelefona(String brojTelefona) {
         this.brojTelefona = brojTelefona;
     }
 
+    /**
+     * Vraca plesni nivo koji ucenik pohadja.
+     * 
+     * @return plesniNivo kao objekat klase PlesniNivo.
+     */
     public PlesniNivo getPlesniNivo() {
         return plesniNivo;
     }
 
+    /**
+     * Postavlja plesni nivo ucenika na unetu vrednost.
+     * 
+     * @param plesniNivo Novi plesni nivo ucenika.
+     */
     public void setPlesniNivo(PlesniNivo plesniNivo) {
         this.plesniNivo = plesniNivo;
     }
 
+    /**
+     * Vraca String reprezentaciju ucenika (ime i prezime).
+     * 
+     * @return ime i prezime ucenika u formatu "ime prezime".
+     */
     @Override
     public String toString() {
         return ime + " " + prezime;
     }
 
+    /**
+     * Vraca hash kod ucenika izracunat na osnovu broja telefona.
+     * 
+     * @return hash kod kao ceo broj.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(brojTelefona);
     }
 
+    /**
+     * Poredi dva ucenika po broju telefona.
+     * 
+     * @param obj Drugi objekat sa kojim se poredi.
+     * @return 
+     * <ul>
+     * <li><b>true</b> - ako su oba objekta klase Ucenik sa istim
+     * brojem telefona ili ako su na istoj adresi.</li>
+     * <li><b>false</b> - ako je drugi objekat null, ako je druge klase
+     * ili ako nemaju isti broj telefona.</li>
+     * </ul>
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -108,6 +217,15 @@ public class Ucenik implements ApstraktniDomenskiObjekat {
         return " JOIN plesni_nivo pn ON u.idPlesniNivo = pn.idPlesniNivo ";
     }
 
+    /**
+     * Vraca uslov za pretragu ucenika na osnovu popunjenih polja.
+     * 
+     * Za ime i prezime koristi se delimicno poklapanje (LIKE '%...%'),
+     * dok se za plesni nivo i broj telefona koristi tacno poklapanje.
+     * 
+     * @return uslov za pretragu kao String ili prazan String ako
+     * nijedno polje nije popunjeno.
+     */
     @Override
     public String uslovZaSelect() {
         StringBuilder sb = new StringBuilder();
