@@ -37,6 +37,12 @@ public class VratiListuCasSO extends ApstraktnaSO {
 		super(repository);
 	}
 
+	/**
+	 * Proverava da li je prosledjeni objekat instanca klase Cas.
+	 * 
+	 * @param ado Domenski objekat ciji se preduslovi proveravaju.
+	 * @throws java.lang.Exception ako objekat nije instanca klase Cas.
+	 */
 	@Override
 	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
 		if (!(ado instanceof Cas)) {
@@ -44,6 +50,12 @@ public class VratiListuCasSO extends ApstraktnaSO {
 		}
 	}
 
+	/**
+	 * Vraca listu svih casova iz baze i cuva je u internoj listi.
+	 * 
+	 * @param ado Domenski objekat (Cas) na osnovu koga se vraca lista.
+	 * @throws java.lang.Exception ako nijedan cas nije vracen iz baze.
+	 */
 	@Override
 	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
 		Cas c = (Cas) ado;
