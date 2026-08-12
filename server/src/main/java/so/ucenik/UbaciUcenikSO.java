@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package so.ucenik;
 
 import domen.ApstraktniDomenskiObjekat;
@@ -11,20 +7,42 @@ import domen.Ucenik;
 import so.ApstraktnaSO;
 
 /**
- *
- * @author Una
+ * Predstavlja sistemsku operaciju kojom se dodaje novi ucenik
+ * u bazu podataka.
+ * 
+ * Nasledjuje ApstraktnaSO i implementira preduslov i izvrsiOperaciju.
+ * 
+ * @author Una Stankovic
  */
-
 public class UbaciUcenikSO extends ApstraktnaSO {
 
+	/**
+	 * Kreira objekat sistemske operacije sa podrazumevanim repozitorijumom.
+	 */
 	public UbaciUcenikSO() {
 		super();
 	}
 
+	/**
+	 * Kreira objekat sistemske operacije sa unetim repozitorijumom.
+	 * 
+	 * @param repository Repozitorijum koji sistemska operacija koristi.
+	 */
 	public UbaciUcenikSO(Repository repository) {
 		super(repository);
 	}
 
+	/**
+	 * Proverava ispravnost ucenika pre dodavanja.
+	 * 
+	 * Proverava da ucenik nije null i da je instanca klase Ucenik,
+	 * kao i da su uneti ime, prezime, broj telefona i plesni nivo.
+	 * 
+	 * @param ado Domenski objekat ciji se preduslovi proveravaju.
+	 * @throws java.lang.Exception ako je ucenik null, ako nije instanca
+	 * klase Ucenik, ili ako su ime, prezime, broj telefona prazni odnosno
+	 * plesni nivo nije izabran.
+	 */
 	@Override
 	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
 		if (ado == null) {
@@ -48,6 +66,13 @@ public class UbaciUcenikSO extends ApstraktnaSO {
 		}
 	}
 
+	/**
+	 * Dodaje ucenika u bazu podataka.
+	 * 
+	 * @param ado Domenski objekat (Ucenik) koji se dodaje.
+	 * @throws java.lang.Exception ako dodje do greske prilikom dodavanja
+	 * ucenika.
+	 */
 	@Override
 	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
 		Ucenik u = (Ucenik) ado;
