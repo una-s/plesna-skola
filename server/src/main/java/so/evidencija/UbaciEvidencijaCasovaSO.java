@@ -8,19 +8,45 @@ import so.ApstraktnaSO;
 import repository.Repository;
 
 /**
- *
- * @author Una
+ * Predstavlja sistemsku operaciju kojom se dodaje nova evidencija
+ * casova zajedno sa njenim stavkama u bazu podataka.
+ * 
+ * Nasledjuje ApstraktnaSO i implementira preduslov i izvrsiOperaciju.
+ * 
+ * @author Una Stankovic
  */
 public class UbaciEvidencijaCasovaSO extends ApstraktnaSO {
 
+	/**
+	 * Kreira objekat sistemske operacije sa podrazumevanim repozitorijumom.
+	 */
 	public UbaciEvidencijaCasovaSO() {
 		super();
 	}
 
+	/**
+	 * Kreira objekat sistemske operacije sa unetim repozitorijumom.
+	 * 
+	 * @param repository Repozitorijum koji sistemska operacija koristi.
+	 */
 	public UbaciEvidencijaCasovaSO(Repository repository) {
 		super(repository);
 	}
 
+	/**
+	 * Proverava ispravnost evidencije casova pre dodavanja.
+	 * 
+	 * Proverava da evidencija nije null i da je instanca klase
+	 * EvidencijaCasova, da je skolska godina uneta i u formatu "xxxx/xxxx",
+	 * da su datumi pocetka i zavrsetka uneti i u ispravnom redosledu,
+	 * da godine datuma odgovaraju skolskoj godini, da su izabrani profesor
+	 * i ucenik, kao i da evidencija ima bar jednu stavku sa ispravnim casom,
+	 * ocenom (od 1 do 5) i datumom prisustva u okviru trajanja evidencije.
+	 * 
+	 * @param ado Domenski objekat ciji se preduslovi proveravaju.
+	 * @throws java.lang.Exception ako bilo koji od navedenih uslova
+	 * nije ispunjen.
+	 */
 	@Override
 	protected void preduslov(ApstraktniDomenskiObjekat ado) throws Exception {
 		if (ado == null) {
@@ -55,24 +81,19 @@ public class UbaciEvidencijaCasovaSO extends ApstraktnaSO {
 		if (ec.getUcenik() == null) {
 			throw new Exception("Ucenik ne sme biti null!");
 		}
-
 		// provera skolske godine i datuma
 		String[] godine = ec.getSkolskaGodina().split("/");
 		int godinaOd = Integer.parseInt(godine[0]);
 		int godinaDo = Integer.parseInt(godine[1]);
-
 		Calendar cal = Calendar.getInstance();
-
 		cal.setTime(ec.getDatumPocetka());
 		if (cal.get(Calendar.YEAR) != godinaOd) {
 			throw new Exception("Godina datuma pocetka mora biti jednaka prvoj godini skolske godine!");
 		}
-
 		cal.setTime(ec.getDatumZavrsetka());
 		if (cal.get(Calendar.YEAR) != godinaDo) {
 			throw new Exception("Godina datuma zavrsetka mora biti jednaka drugoj godini skolske godine!");
 		}
-
 		// provera stavki
 		for (StavkaEvidencijeCasova stavka : ec.getStavke()) {
 			if (stavka.getCas() == null) {
@@ -91,6 +112,14 @@ public class UbaciEvidencijaCasovaSO extends ApstraktnaSO {
 		}
 	}
 
+	/**
+	 * Dodaje evidenciju casova u bazu, a zatim dodaje svaku njenu stavku
+	 * povezanu sa tom evidencijom.
+	 * 
+	 * @param ado Domenski objekat (EvidencijaCasova) koji se dodaje.
+	 * @throws java.lang.Exception ako dodje do greske prilikom dodavanja
+	 * evidencije ili njenih stavki.
+	 */
 	@Override
 	protected void izvrsiOperaciju(ApstraktniDomenskiObjekat ado) throws Exception {
 		EvidencijaCasova evidencija = (EvidencijaCasova) ado;
