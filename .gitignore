@@ -25,4 +25,5 @@ Thumbs.db
 
 # Logs
 *.log
-/doc/
+doc/
+/*.json
