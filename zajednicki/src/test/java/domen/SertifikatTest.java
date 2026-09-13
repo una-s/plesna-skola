@@ -81,6 +81,18 @@ class SertifikatTest {
 		assertEquals("Plesni savez Srbije", s.getInstitucija());
 	}
 
+	@Test
+	void testSetInstitucijaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> s.setInstitucija(null));
+		assertEquals("Institucija ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetInstitucijaPrazna() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> s.setInstitucija(""));
+		assertEquals("Institucija ne sme biti prazna!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Sertifikat#setNaziv(java.lang.String)}.
 	 */
@@ -88,6 +100,18 @@ class SertifikatTest {
 	void testSetNaziv() {
 		s.setNaziv("Tango instruktor");
 		assertEquals("Tango instruktor", s.getNaziv());
+	}
+
+	@Test
+	void testSetNazivNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> s.setNaziv(null));
+		assertEquals("Naziv ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetNazivPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> s.setNaziv(""));
+		assertEquals("Naziv ne sme biti prazan!", ex.getMessage());
 	}
 
 	/**
@@ -146,7 +170,8 @@ class SertifikatTest {
 	@Test
 	void testVratiVrednostZaIzmenu() {
 		Sertifikat sert = new Sertifikat(1L, "Akademija Savremenog Plesa", "Salsa instruktor");
-		assertEquals("institucija = 'Akademija Savremenog Plesa', naziv = 'Salsa instruktor'", sert.vratiVrednostZaIzmenu());
+		assertEquals("institucija = 'Akademija Savremenog Plesa', naziv = 'Salsa instruktor'",
+				sert.vratiVrednostZaIzmenu());
 	}
 
 	@Test
