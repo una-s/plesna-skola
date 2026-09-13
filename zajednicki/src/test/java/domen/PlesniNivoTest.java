@@ -81,6 +81,18 @@ class PlesniNivoTest {
 		assertEquals("Napredni", pn.getOpis());
 	}
 
+	@Test
+	void testSetOpisNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> pn.setOpis(null));
+		assertEquals("Opis ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetOpisPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> pn.setOpis(""));
+		assertEquals("Opis ne sme biti prazan!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.PlesniNivo#setNivo(int)}.
 	 */
@@ -88,6 +100,18 @@ class PlesniNivoTest {
 	void testSetNivo() {
 		pn.setNivo(3);
 		assertEquals(3, pn.getNivo());
+	}
+
+	@Test
+	void testSetNivoNula() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> pn.setNivo(0));
+		assertEquals("Nivo mora biti veci od nule!", ex.getMessage());
+	}
+
+	@Test
+	void testSetNivoNegativan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> pn.setNivo(-3));
+		assertEquals("Nivo mora biti veci od nule!", ex.getMessage());
 	}
 
 	/**
