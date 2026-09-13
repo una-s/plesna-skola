@@ -35,6 +35,14 @@ public class PromeniEvidencijuForma extends javax.swing.JFrame {
      */
     public PromeniEvidencijuForma(PrikazEvidencijeForma forma, EvidencijaCasova evidencija) {
         initComponents();
+     
+        javax.swing.JScrollPane glavniScroll = new javax.swing.JScrollPane(getContentPane());
+        setContentPane(glavniScroll);
+
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+        setSize(800, 600);
+        setLocationRelativeTo(null);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.ec = evidencija;
         this.pef = forma;
