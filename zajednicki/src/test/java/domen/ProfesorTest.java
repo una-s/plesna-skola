@@ -84,6 +84,18 @@ class ProfesorTest {
 		assertEquals("Marko", p.getIme());
 	}
 
+	@Test
+	void testSetImeNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> p.setIme(null));
+		assertEquals("Ime ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetImePrazno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setIme(""));
+		assertEquals("Ime ne sme biti prazno!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Profesor#setPrezime(java.lang.String)}.
 	 */
@@ -91,6 +103,18 @@ class ProfesorTest {
 	void testSetPrezime() {
 		p.setPrezime("Markovic");
 		assertEquals("Markovic", p.getPrezime());
+	}
+
+	@Test
+	void testSetPrezimeNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> p.setPrezime(null));
+		assertEquals("Prezime ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetPrezimePrazno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setPrezime(""));
+		assertEquals("Prezime ne sme biti prazno!", ex.getMessage());
 	}
 
 	/**
@@ -102,6 +126,24 @@ class ProfesorTest {
 		assertEquals("0653334444", p.getBrojTelefona());
 	}
 
+	@Test
+	void testSetBrojTelefonaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> p.setBrojTelefona(null));
+		assertEquals("Broj telefona ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetBrojTelefonaPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setBrojTelefona(""));
+		assertEquals("Broj telefona ne sme biti prazan!", ex.getMessage());
+	}
+
+	@Test
+	void testSetBrojTelefonaNijeCifre() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setBrojTelefona("064-123"));
+		assertEquals("Broj telefona mora sadrzati samo cifre!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Profesor#setKorisnickoIme(java.lang.String)}.
 	 */
@@ -111,6 +153,18 @@ class ProfesorTest {
 		assertEquals("mmarkovic", p.getKorisnickoIme());
 	}
 
+	@Test
+	void testSetKorisnickoImeNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> p.setKorisnickoIme(null));
+		assertEquals("Korisnicko ime ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetKorisnickoImePrazno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setKorisnickoIme(""));
+		assertEquals("Korisnicko ime ne sme biti prazno!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Profesor#setSifra(java.lang.String)}.
 	 */
@@ -118,6 +172,18 @@ class ProfesorTest {
 	void testSetSifra() {
 		p.setSifra("tajna");
 		assertEquals("tajna", p.getSifra());
+	}
+
+	@Test
+	void testSetSifraNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> p.setSifra(null));
+		assertEquals("Sifra ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetSifraPrazna() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> p.setSifra(""));
+		assertEquals("Sifra ne sme biti prazna!", ex.getMessage());
 	}
 
 	/**
