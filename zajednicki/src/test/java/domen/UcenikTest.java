@@ -90,6 +90,18 @@ class UcenikTest {
 		assertEquals("Marko", u.getIme());
 	}
 
+	@Test
+	void testSetImeNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> u.setIme(null));
+		assertEquals("Ime ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetImePrazno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> u.setIme(""));
+		assertEquals("Ime ne sme biti prazno!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Ucenik#setPrezime(java.lang.String)}.
 	 */
@@ -97,6 +109,18 @@ class UcenikTest {
 	void testSetPrezime() {
 		u.setPrezime("Markovic");
 		assertEquals("Markovic", u.getPrezime());
+	}
+
+	@Test
+	void testSetPrezimeNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> u.setPrezime(null));
+		assertEquals("Prezime ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetPrezimePrazno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> u.setPrezime(""));
+		assertEquals("Prezime ne sme biti prazno!", ex.getMessage());
 	}
 
 	/**
@@ -108,6 +132,24 @@ class UcenikTest {
 		assertEquals("0653334444", u.getBrojTelefona());
 	}
 
+	@Test
+	void testSetBrojTelefonaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> u.setBrojTelefona(null));
+		assertEquals("Broj telefona ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetBrojTelefonaPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> u.setBrojTelefona(""));
+		assertEquals("Broj telefona ne sme biti prazan!", ex.getMessage());
+	}
+
+	@Test
+	void testSetBrojTelefonaNijeCifre() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> u.setBrojTelefona("064-123"));
+		assertEquals("Broj telefona mora sadrzati samo cifre!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Ucenik#setPlesniNivo(domen.PlesniNivo)}.
 	 */
@@ -116,6 +158,12 @@ class UcenikTest {
 		PlesniNivo pn = new PlesniNivo();
 		u.setPlesniNivo(pn);
 		assertEquals(pn, u.getPlesniNivo());
+	}
+
+	@Test
+	void testSetPlesniNivoNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> u.setPlesniNivo(null));
+		assertEquals("Plesni nivo ne sme biti null!", ex.getMessage());
 	}
 
 	/**

@@ -17,6 +17,7 @@ import java.util.List;
 
 import domen.Cas;
 import domen.EvidencijaCasova;
+import domen.PlesniNivo;
 import domen.Profesor;
 import domen.StavkaEvidencijeCasova;
 import domen.Ucenik;
@@ -62,7 +63,7 @@ class UbaciEvidencijaCasovaSOTest {
 		ec.setDatumPocetka(pocetak);
 		ec.setDatumZavrsetka(zavrsetak);
 		ec.setProfesor(new Profesor(1L, "Ana", "Anic", "064", "aanic", "sifra"));
-		ec.setUcenik(new Ucenik(1L, "Marko", "Markovic", "065", null));
+		ec.setUcenik(new Ucenik(1L, "Marko", "Markovic", "0651234567", new PlesniNivo(1L, "Pocetni", 1)));
 
 		List<StavkaEvidencijeCasova> stavke = new ArrayList<>();
 		StavkaEvidencijeCasova stavka = new StavkaEvidencijeCasova();
