@@ -103,6 +103,18 @@ class StavkaEvidencijeCasovaTest {
 		assertEquals(4, stavka.getOcena());
 	}
 
+	@Test
+	void testSetOcenaNula() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> stavka.setOcena(0));
+		assertEquals("Ocena mora biti izmedju 1 i 5!", ex.getMessage());
+	}
+
+	@Test
+	void testSetOcenaPreterana() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> stavka.setOcena(6));
+		assertEquals("Ocena mora biti izmedju 1 i 5!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for
 	 * {@link domen.StavkaEvidencijeCasova#setDatumPrisustva(java.util.Date)}.
@@ -111,6 +123,12 @@ class StavkaEvidencijeCasovaTest {
 	void testSetDatumPrisustva() {
 		stavka.setDatumPrisustva(datumPrisustva);
 		assertEquals(datumPrisustva, stavka.getDatumPrisustva());
+	}
+
+	@Test
+	void testSetDatumPrisustvaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> stavka.setDatumPrisustva(null));
+		assertEquals("Datum prisustva ne sme biti null!", ex.getMessage());
 	}
 
 	/**
@@ -130,6 +148,12 @@ class StavkaEvidencijeCasovaTest {
 	void testSetCas() {
 		stavka.setCas(cas);
 		assertEquals(cas, stavka.getCas());
+	}
+
+	@Test
+	void testSetCasNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> stavka.setCas(null));
+		assertEquals("Cas ne sme biti null!", ex.getMessage());
 	}
 
 	/**

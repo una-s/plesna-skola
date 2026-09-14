@@ -194,34 +194,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Godina datuma zavrsetka mora biti jednaka drugoj godini skolske godine!", ex.getMessage());
 	}
 
-	// 13. cas u stavci null
-	@Test
-	void testPreduslovStavkaCasNull() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setCas(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Cas u stavci ne sme biti null!", ex.getMessage());
-	}
-
-	// 14. ocena van opsega
-	@Test
-	void testPreduslovOcenaVanOpsega() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setOcena(6);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Ocena mora biti izmedju 1 i 5!", ex.getMessage());
-	}
-
-	// 15a. datum prisustva null
-	@Test
-	void testPreduslovStavkaDatumNull() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setDatumPrisustva(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Datum prisustva ne sme biti null!", ex.getMessage());
-	}
-
-	// 15b. datum prisustva van opsega
+	// 13. datum prisustva van opsega
 	@Test
 	void testPreduslovDatumPrisustvaVanOpsega() {
 		EvidencijaCasova ec = validnaEvidencija();
