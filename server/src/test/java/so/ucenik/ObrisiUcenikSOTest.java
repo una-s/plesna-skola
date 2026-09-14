@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import domen.PlesniNivo;
 import domen.Profesor;
 import domen.Ucenik;
 import repository.db.DbRepository;
@@ -60,7 +61,8 @@ class ObrisiUcenikSOTest {
 
 	@Test
 	void testIzvrsiOperaciju() throws Exception {
-		Ucenik u = new Ucenik(1L, "Marko", "Markovic", "064", null);
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
+		Ucenik u = new Ucenik(1L, "Marko", "Markovic", "0641234567", pn);
 
 		repository.delete(u);
 		expectLastCall();

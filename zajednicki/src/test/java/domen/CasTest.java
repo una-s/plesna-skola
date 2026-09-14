@@ -82,6 +82,18 @@ class CasTest {
 		assertEquals("Tango napredni", c.getNaziv());
 	}
 
+	@Test
+	void testSetNazivNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> c.setNaziv(null));
+		assertEquals("Naziv ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetNazivPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> c.setNaziv(""));
+		assertEquals("Naziv ne sme biti prazan!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Cas#setTrajanje(int)}.
 	 */
@@ -91,6 +103,18 @@ class CasTest {
 		assertEquals(90, c.getTrajanje());
 	}
 
+	@Test
+	void testSetTrajanjeNula() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> c.setTrajanje(0));
+		assertEquals("Trajanje mora biti vece od nule!", ex.getMessage());
+	}
+
+	@Test
+	void testSetTrajanjeNegativno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> c.setTrajanje(-10));
+		assertEquals("Trajanje mora biti vece od nule!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.Cas#setStilPlesa(java.lang.String)}.
 	 */
@@ -98,6 +122,18 @@ class CasTest {
 	void testSetStilPlesa() {
 		c.setStilPlesa("Tango");
 		assertEquals("Tango", c.getStilPlesa());
+	}
+
+	@Test
+	void testSetStilPlesaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> c.setStilPlesa(null));
+		assertEquals("Stil plesa ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetStilPlesaPrazan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> c.setStilPlesa(""));
+		assertEquals("Stil plesa ne sme biti prazan!", ex.getMessage());
 	}
 
 	/**

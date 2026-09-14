@@ -82,6 +82,12 @@ class PrSTest {
 		assertEquals(datum, prs.getDatumIzdavanja());
 	}
 
+	@Test
+	void testSetDatumIzdavanjaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> prs.setDatumIzdavanja(null));
+		assertEquals("Datum izdavanja ne sme biti null!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.PrS#setProfesor(domen.Profesor)}.
 	 */
@@ -91,6 +97,12 @@ class PrSTest {
 		assertEquals(profesor, prs.getProfesor());
 	}
 
+	@Test
+	void testSetProfesorNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> prs.setProfesor(null));
+		assertEquals("Profesor ne sme biti null!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.PrS#setSertifikat(domen.Sertifikat)}.
 	 */
@@ -98,6 +110,12 @@ class PrSTest {
 	void testSetSertifikat() {
 		prs.setSertifikat(sertifikat);
 		assertEquals(sertifikat, prs.getSertifikat());
+	}
+
+	@Test
+	void testSetSertifikatNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> prs.setSertifikat(null));
+		assertEquals("Sertifikat ne sme biti null!", ex.getMessage());
 	}
 
 	/**

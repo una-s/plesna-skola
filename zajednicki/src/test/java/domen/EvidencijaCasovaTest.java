@@ -106,6 +106,18 @@ class EvidencijaCasovaTest {
 		assertEquals("2025/2026", ec.getSkolskaGodina());
 	}
 
+	@Test
+	void testSetSkolskaGodinaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> ec.setSkolskaGodina(null));
+		assertEquals("Skolska godina ne sme biti null!", ex.getMessage());
+	}
+
+	@Test
+	void testSetSkolskaGodinaPrazna() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> ec.setSkolskaGodina(""));
+		assertEquals("Skolska godina ne sme biti prazna!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for
 	 * {@link domen.EvidencijaCasova#setDatumPocetka(java.util.Date)}.
@@ -116,6 +128,12 @@ class EvidencijaCasovaTest {
 		assertEquals(datumPocetka, ec.getDatumPocetka());
 	}
 
+	@Test
+	void testSetDatumPocetkaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> ec.setDatumPocetka(null));
+		assertEquals("Datum pocetka ne sme biti null!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for
 	 * {@link domen.EvidencijaCasova#setDatumZavrsetka(java.util.Date)}.
@@ -124,6 +142,12 @@ class EvidencijaCasovaTest {
 	final void testSetDatumZavrsetka() {
 		ec.setDatumZavrsetka(datumZavrsetka);
 		assertEquals(datumZavrsetka, ec.getDatumZavrsetka());
+	}
+
+	@Test
+	void testSetDatumZavrsetkaNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> ec.setDatumZavrsetka(null));
+		assertEquals("Datum zavrsetka ne sme biti null!", ex.getMessage());
 	}
 
 	/**
@@ -162,6 +186,12 @@ class EvidencijaCasovaTest {
 		assertEquals(profesor, ec.getProfesor());
 	}
 
+	@Test
+	void testSetProfesorNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> ec.setProfesor(null));
+		assertEquals("Profesor ne sme biti null!", ex.getMessage());
+	}
+
 	/**
 	 * Test method for {@link domen.EvidencijaCasova#setUcenik(domen.Ucenik)}.
 	 */
@@ -169,6 +199,12 @@ class EvidencijaCasovaTest {
 	final void testSetUcenik() {
 		ec.setStavke(stavke);
 		assertEquals(stavke, ec.getStavke());
+	}
+
+	@Test
+	void testSetUcenikNull() {
+		Exception ex = assertThrows(NullPointerException.class, () -> ec.setUcenik(null));
+		assertEquals("Ucenik ne sme biti null!", ex.getMessage());
 	}
 
 	/**
@@ -278,6 +314,30 @@ class EvidencijaCasovaTest {
 	void testVratiPrimarniKljuc() {
 		ec.setIdEvidencijaCasova(5L);
 		assertEquals("idEvidencijaCasova = 5", ec.vratiPrimarniKljuc());
+	}
+
+	@Test
+	void testSetProsecnaOcenaNegativna() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> ec.setProsecnaOcena(-1));
+		assertEquals("Prosecna ocena mora biti izmedju 0 i 5!", ex.getMessage());
+	}
+
+	@Test
+	void testSetProsecnaOcenaPreterana() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> ec.setProsecnaOcena(6));
+		assertEquals("Prosecna ocena mora biti izmedju 0 i 5!", ex.getMessage());
+	}
+
+	@Test
+	void testSetBrojPrisustvaNegativan() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> ec.setBrojPrisustva(-1));
+		assertEquals("Broj prisustava ne sme biti negativan!", ex.getMessage());
+	}
+
+	@Test
+	void testSetTrajanjeNegativno() {
+		Exception ex = assertThrows(IllegalArgumentException.class, () -> ec.setTrajanjeEvidencije(-1));
+		assertEquals("Trajanje evidencije ne sme biti negativno!", ex.getMessage());
 	}
 
 }

@@ -10,322 +10,362 @@ import java.util.Objects;
  * 
  * Svaki ucenik ima ime, prezime, broj telefona i plesni nivo koji pohadja.
  * 
- * Implementira ApstraktniDomenskiObjekat za rad sa tabelom "ucenik"
- * u bazi podataka.
+ * Implementira ApstraktniDomenskiObjekat za rad sa tabelom "ucenik" u bazi
+ * podataka.
  * 
  * @author Una Stankovic
  */
 public class Ucenik implements ApstraktniDomenskiObjekat {
 
-    /**
-     * Jedinstveni identifikator ucenika kao Long.
-     */
-    private Long idUcenik;
+	/**
+	 * Jedinstveni identifikator ucenika kao Long.
+	 */
+	private Long idUcenik;
 
-    /**
-     * Ime ucenika kao String.
-     */
-    private String ime;
+	/**
+	 * Ime ucenika kao String.
+	 */
+	private String ime;
 
-    /**
-     * Prezime ucenika kao String.
-     */
-    private String prezime;
+	/**
+	 * Prezime ucenika kao String.
+	 */
+	private String prezime;
 
-    /**
-     * Broj telefona ucenika kao String.
-     */
-    private String brojTelefona;
+	/**
+	 * Broj telefona ucenika kao String.
+	 */
+	private String brojTelefona;
 
-    /**
-     * Plesni nivo koji ucenik pohadja.
-     */
-    private PlesniNivo plesniNivo;
+	/**
+	 * Plesni nivo koji ucenik pohadja.
+	 */
+	private PlesniNivo plesniNivo;
 
-    /**
-     * Kreira objekat klase Ucenik sa podrazumevanim (null) vrednostima.
-     */
-    public Ucenik() {
-    }
+	/**
+	 * Kreira objekat klase Ucenik sa podrazumevanim (null) vrednostima.
+	 */
+	public Ucenik() {
+	}
 
-    /**
-     * Kreira objekat klase Ucenik sa zadatim vrednostima.
-     * 
-     * @param idUcenik Jedinstveni identifikator ucenika.
-     * @param ime Ime ucenika.
-     * @param prezime Prezime ucenika.
-     * @param brojTelefona Broj telefona ucenika.
-     * @param plesniNivo Plesni nivo koji ucenik pohadja.
-     */
-    public Ucenik(Long idUcenik, String ime, String prezime, String brojTelefona, PlesniNivo plesniNivo) {
-        this.idUcenik = idUcenik;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.brojTelefona = brojTelefona;
-        this.plesniNivo = plesniNivo;
-    }
+	/**
+	 * Kreira objekat klase Ucenik sa zadatim vrednostima.
+	 * 
+	 * Poziva set metode za sva polja uz logicku kontrolu.
+	 * 
+	 * @param idUcenik     Jedinstveni identifikator ucenika.
+	 * @param ime          Ime ucenika. Ne sme biti null niti prazno.
+	 * @param prezime      Prezime ucenika. Ne sme biti null niti prazno.
+	 * @param brojTelefona Broj telefona ucenika. Ne sme biti null niti prazan i
+	 *                     mora sadrzati samo cifre.
+	 * @param plesniNivo   Plesni nivo koji ucenik pohadja. Ne sme biti null.
+	 * @throws java.lang.NullPointerException     ako je ime, prezime, broj telefona
+	 *                                            ili plesni nivo null.
+	 * @throws java.lang.IllegalArgumentException ako je ime ili prezime prazno, ili
+	 *                                            ako je broj telefona prazan
+	 *                                            odnosno sadrzi znakove koji nisu
+	 *                                            cifre.
+	 */
+	public Ucenik(Long idUcenik, String ime, String prezime, String brojTelefona, PlesniNivo plesniNivo) {
+		this.idUcenik = idUcenik;
+		setIme(ime);
+		setPrezime(prezime);
+		setBrojTelefona(brojTelefona);
+		setPlesniNivo(plesniNivo);
+	}
 
-    /**
-     * Vraca identifikator ucenika.
-     * 
-     * @return idUcenik kao Long.
-     */
-    public Long getIdUcenik() {
-        return idUcenik;
-    }
+	/**
+	 * Vraca identifikator ucenika.
+	 * 
+	 * @return idUcenik kao Long.
+	 */
+	public Long getIdUcenik() {
+		return idUcenik;
+	}
 
-    /**
-     * Postavlja identifikator ucenika na unetu vrednost.
-     * 
-     * @param idUcenik Novi identifikator ucenika.
-     */
-    public void setIdUcenik(Long idUcenik) {
-        this.idUcenik = idUcenik;
-    }
+	/**
+	 * Postavlja identifikator ucenika na unetu vrednost.
+	 * 
+	 * @param idUcenik Novi identifikator ucenika.
+	 */
+	public void setIdUcenik(Long idUcenik) {
+		this.idUcenik = idUcenik;
+	}
 
-    /**
-     * Vraca ime ucenika.
-     * 
-     * @return ime ucenika kao String.
-     */
-    public String getIme() {
-        return ime;
-    }
+	/**
+	 * Vraca ime ucenika.
+	 * 
+	 * @return ime ucenika kao String.
+	 */
+	public String getIme() {
+		return ime;
+	}
 
-    /**
-     * Postavlja ime ucenika na unetu vrednost.
-     * 
-     * @param ime Novo ime ucenika.
-     */
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
+	/**
+	 * Postavlja ime ucenika na unetu vrednost.
+	 * 
+	 * @param ime Novo ime ucenika. Ne sme biti null niti prazno.
+	 * @throws java.lang.NullPointerException     ako je uneto ime null.
+	 * @throws java.lang.IllegalArgumentException ako je uneto ime prazno.
+	 */
+	public void setIme(String ime) {
+		if (ime == null) {
+			throw new NullPointerException("Ime ne sme biti null!");
+		}
+		if (ime.isEmpty()) {
+			throw new IllegalArgumentException("Ime ne sme biti prazno!");
+		}
+		this.ime = ime;
+	}
 
-    /**
-     * Vraca prezime ucenika.
-     * 
-     * @return prezime ucenika kao String.
-     */
-    public String getPrezime() {
-        return prezime;
-    }
+	/**
+	 * Vraca prezime ucenika.
+	 * 
+	 * @return prezime ucenika kao String.
+	 */
+	public String getPrezime() {
+		return prezime;
+	}
 
-    /**
-     * Postavlja prezime ucenika na unetu vrednost.
-     * 
-     * @param prezime Novo prezime ucenika.
-     */
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
+	/**
+	 * Postavlja prezime ucenika na unetu vrednost.
+	 * 
+	 * @param prezime Novo prezime ucenika. Ne sme biti null niti prazno.
+	 * @throws java.lang.NullPointerException     ako je uneto prezime null.
+	 * @throws java.lang.IllegalArgumentException ako je uneto prezime prazno.
+	 */
+	public void setPrezime(String prezime) {
+		if (prezime == null) {
+			throw new NullPointerException("Prezime ne sme biti null!");
+		}
+		if (prezime.isEmpty()) {
+			throw new IllegalArgumentException("Prezime ne sme biti prazno!");
+		}
+		this.prezime = prezime;
+	}
 
-    /**
-     * Vraca broj telefona ucenika.
-     * 
-     * @return brojTelefona kao String.
-     */
-    public String getBrojTelefona() {
-        return brojTelefona;
-    }
+	/**
+	 * Vraca broj telefona ucenika.
+	 * 
+	 * @return brojTelefona kao String.
+	 */
+	public String getBrojTelefona() {
+		return brojTelefona;
+	}
 
-    /**
-     * Postavlja broj telefona ucenika na unetu vrednost.
-     * 
-     * @param brojTelefona Novi broj telefona ucenika.
-     */
-    public void setBrojTelefona(String brojTelefona) {
-        this.brojTelefona = brojTelefona;
-    }
+	/**
+	 * Postavlja broj telefona ucenika na unetu vrednost.
+	 * 
+	 * @param brojTelefona Novi broj telefona ucenika. Ne sme biti null niti prazan
+	 *                     i mora sadrzati samo cifre.
+	 * @throws java.lang.NullPointerException     ako je uneti broj telefona null.
+	 * @throws java.lang.IllegalArgumentException ako je uneti broj telefona prazan
+	 *                                            ili sadrzi znakove koji nisu
+	 *                                            cifre.
+	 */
+	public void setBrojTelefona(String brojTelefona) {
+		if (brojTelefona == null) {
+			throw new NullPointerException("Broj telefona ne sme biti null!");
+		}
+		if (brojTelefona.isEmpty()) {
+			throw new IllegalArgumentException("Broj telefona ne sme biti prazan!");
+		}
+		if (!brojTelefona.matches("\\d+")) {
+			throw new IllegalArgumentException("Broj telefona mora sadrzati samo cifre!");
+		}
+		this.brojTelefona = brojTelefona;
+	}
 
-    /**
-     * Vraca plesni nivo koji ucenik pohadja.
-     * 
-     * @return plesniNivo kao objekat klase PlesniNivo.
-     */
-    public PlesniNivo getPlesniNivo() {
-        return plesniNivo;
-    }
+	/**
+	 * Vraca plesni nivo koji ucenik pohadja.
+	 * 
+	 * @return plesniNivo kao objekat klase PlesniNivo.
+	 */
+	public PlesniNivo getPlesniNivo() {
+		return plesniNivo;
+	}
 
-    /**
-     * Postavlja plesni nivo ucenika na unetu vrednost.
-     * 
-     * @param plesniNivo Novi plesni nivo ucenika.
-     */
-    public void setPlesniNivo(PlesniNivo plesniNivo) {
-        this.plesniNivo = plesniNivo;
-    }
+	/**
+	 * Postavlja plesni nivo ucenika na unetu vrednost.
+	 * 
+	 * @param plesniNivo Novi plesni nivo ucenika. Ne sme biti null.
+	 * @throws java.lang.NullPointerException ako je uneti plesni nivo null.
+	 */
+	public void setPlesniNivo(PlesniNivo plesniNivo) {
+		if (plesniNivo == null) {
+			throw new NullPointerException("Plesni nivo ne sme biti null!");
+		}
+		this.plesniNivo = plesniNivo;
+	}
 
-    /**
-     * Vraca String reprezentaciju ucenika (ime i prezime).
-     * 
-     * @return ime i prezime ucenika u formatu "ime prezime".
-     */
-    @Override
-    public String toString() {
-        return ime + " " + prezime;
-    }
+	/**
+	 * Vraca String reprezentaciju ucenika (ime i prezime).
+	 * 
+	 * @return ime i prezime ucenika u formatu "ime prezime".
+	 */
+	@Override
+	public String toString() {
+		return ime + " " + prezime;
+	}
 
-    /**
-     * Vraca hash kod ucenika izracunat na osnovu broja telefona.
-     * 
-     * @return hash kod kao ceo broj.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(brojTelefona);
-    }
+	/**
+	 * Vraca hash kod ucenika izracunat na osnovu broja telefona.
+	 * 
+	 * @return hash kod kao ceo broj.
+	 */
+	@Override
+	public int hashCode() {
+		return Objects.hash(brojTelefona);
+	}
 
-    /**
-     * Poredi dva ucenika po broju telefona.
-     * 
-     * @param obj Drugi objekat sa kojim se poredi.
-     * @return 
-     * <ul>
-     * <li><b>true</b> - ako su oba objekta klase Ucenik sa istim
-     * brojem telefona ili ako su na istoj adresi.</li>
-     * <li><b>false</b> - ako je drugi objekat null, ako je druge klase
-     * ili ako nemaju isti broj telefona.</li>
-     * </ul>
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ucenik other = (Ucenik) obj;
-        return Objects.equals(this.brojTelefona, other.brojTelefona);
-    }
+	/**
+	 * Poredi dva ucenika po broju telefona.
+	 * 
+	 * @param obj Drugi objekat sa kojim se poredi.
+	 * @return
+	 *         <ul>
+	 *         <li><b>true</b> - ako su oba objekta klase Ucenik sa istim brojem
+	 *         telefona ili ako su na istoj adresi.</li>
+	 *         <li><b>false</b> - ako je drugi objekat null, ako je druge klase ili
+	 *         ako nemaju isti broj telefona.</li>
+	 *         </ul>
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Ucenik other = (Ucenik) obj;
+		return Objects.equals(this.brojTelefona, other.brojTelefona);
+	}
 
-    @Override
-    public String vratiNazivTabele() {
-        return "ucenik";
-    }
+	@Override
+	public String vratiNazivTabele() {
+		return "ucenik";
+	}
 
-    @Override
-    public String alias() {
-        return " u ";
-    }
+	@Override
+	public String alias() {
+		return " u ";
+	}
 
-    @Override
-    public String join() {
-        return " JOIN plesni_nivo pn ON u.idPlesniNivo = pn.idPlesniNivo ";
-    }
+	@Override
+	public String join() {
+		return " JOIN plesni_nivo pn ON u.idPlesniNivo = pn.idPlesniNivo ";
+	}
 
-    /**
-     * Vraca uslov za pretragu ucenika na osnovu popunjenih polja.
-     * 
-     * Za ime i prezime koristi se delimicno poklapanje (LIKE '%...%'),
-     * dok se za plesni nivo i broj telefona koristi tacno poklapanje.
-     * 
-     * @return uslov za pretragu kao String ili prazan String ako
-     * nijedno polje nije popunjeno.
-     */
-    @Override
-    public String uslovZaSelect() {
-        StringBuilder sb = new StringBuilder();
+	/**
+	 * Vraca uslov za pretragu ucenika na osnovu popunjenih polja.
+	 * 
+	 * Za ime i prezime koristi se delimicno poklapanje (LIKE '%...%'), dok se za
+	 * plesni nivo i broj telefona koristi tacno poklapanje.
+	 * 
+	 * @return uslov za pretragu kao String ili prazan String ako nijedno polje nije
+	 *         popunjeno.
+	 */
+	@Override
+	public String uslovZaSelect() {
+		StringBuilder sb = new StringBuilder();
 
-        if (ime != null && !ime.isEmpty()) {
-            sb.append("u.ime LIKE '%").append(ime).append("%'");
-        }
-        if (prezime != null && !prezime.isEmpty()) {
-            if (sb.length() > 0) {
-                sb.append(" AND ");
-            }
-            sb.append("u.prezime LIKE '%").append(prezime).append("%'");
-        }
-        if (plesniNivo != null) {
-            if (sb.length() > 0) {
-                sb.append(" AND ");
-            }
-            sb.append("u.idPlesniNivo = ").append(plesniNivo.getIdPlesniNivo());
-        }
-        if (brojTelefona != null && !brojTelefona.isEmpty()) {
-            if (sb.length() > 0) {
-                sb.append(" AND ");
-            }
-            sb.append("u.brojTelefona = '").append(brojTelefona).append("'");
-        }
+		if (ime != null && !ime.isEmpty()) {
+			sb.append("u.ime LIKE '%").append(ime).append("%'");
+		}
+		if (prezime != null && !prezime.isEmpty()) {
+			if (sb.length() > 0) {
+				sb.append(" AND ");
+			}
+			sb.append("u.prezime LIKE '%").append(prezime).append("%'");
+		}
+		if (plesniNivo != null) {
+			if (sb.length() > 0) {
+				sb.append(" AND ");
+			}
+			sb.append("u.idPlesniNivo = ").append(plesniNivo.getIdPlesniNivo());
+		}
+		if (brojTelefona != null && !brojTelefona.isEmpty()) {
+			if (sb.length() > 0) {
+				sb.append(" AND ");
+			}
+			sb.append("u.brojTelefona = '").append(brojTelefona).append("'");
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public String vratiKoloneZaUbacivanje() {
-        return "ime, prezime, brojTelefona, idPlesniNivo";
-    }
+	@Override
+	public String vratiKoloneZaUbacivanje() {
+		return "ime, prezime, brojTelefona, idPlesniNivo";
+	}
 
-    @Override
-    public String vratiVrednostZaUbacivanje() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("'").append(ime).append("', ")
-                .append("'").append(prezime).append("', ")
-                .append("'").append(brojTelefona).append("', ")
-                .append(plesniNivo.getIdPlesniNivo());
-        return sb.toString();
-    }
+	@Override
+	public String vratiVrednostZaUbacivanje() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("'").append(ime).append("', ").append("'").append(prezime).append("', ").append("'")
+				.append(brojTelefona).append("', ").append(plesniNivo.getIdPlesniNivo());
+		return sb.toString();
+	}
 
-    @Override
-    public String vratiVrednostZaIzmenu() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("ime = '").append(ime).append("', ")
-                .append("prezime = '").append(prezime).append("', ")
-                .append("brojTelefona = '").append(brojTelefona).append("', ")
-                .append("idPlesniNivo = ").append(plesniNivo.getIdPlesniNivo());
-        return sb.toString();
-    }
+	@Override
+	public String vratiVrednostZaIzmenu() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("ime = '").append(ime).append("', ").append("prezime = '").append(prezime).append("', ")
+				.append("brojTelefona = '").append(brojTelefona).append("', ").append("idPlesniNivo = ")
+				.append(plesniNivo.getIdPlesniNivo());
+		return sb.toString();
+	}
 
-    @Override
-    public String vratiPrimarniKljuc() {
-        return "idUcenik = " + idUcenik;
-    }
+	@Override
+	public String vratiPrimarniKljuc() {
+		return "idUcenik = " + idUcenik;
+	}
 
-    @Override
-    public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
-        while (rs.next()) {
-            Long idUcenik = rs.getLong("u.idUcenik");
-            String ime = rs.getString("u.ime");
-            String prezime = rs.getString("u.prezime");
-            String brTel = rs.getString("u.brojTelefona");
+	@Override
+	public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
+		List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+		while (rs.next()) {
+			Long idUcenik = rs.getLong("u.idUcenik");
+			String ime = rs.getString("u.ime");
+			String prezime = rs.getString("u.prezime");
+			String brTel = rs.getString("u.brojTelefona");
 
-            Long idPlesniNivo = rs.getLong("pn.idPlesniNivo");
-            String opis = rs.getString("pn.opis");
-            int nivo = rs.getInt("pn.nivo");
+			Long idPlesniNivo = rs.getLong("pn.idPlesniNivo");
+			String opis = rs.getString("pn.opis");
+			int nivo = rs.getInt("pn.nivo");
 
-            PlesniNivo pn = new PlesniNivo(idPlesniNivo, opis, nivo);
+			PlesniNivo pn = new PlesniNivo(idPlesniNivo, opis, nivo);
 
-            lista.add(new Ucenik(idUcenik, ime, prezime, brTel, pn));
-        }
-        return lista;
-    }
+			lista.add(new Ucenik(idUcenik, ime, prezime, brTel, pn));
+		}
+		return lista;
+	}
 
-    @Override
-    public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        if (rs.next()) {
-            Long idUcenik = rs.getLong("u.idUcenik");
-            String ime = rs.getString("u.ime");
-            String prezime = rs.getString("u.prezime");
-            String brTel = rs.getString("u.brojTelefona");
+	@Override
+	public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
+		if (rs.next()) {
+			Long idUcenik = rs.getLong("u.idUcenik");
+			String ime = rs.getString("u.ime");
+			String prezime = rs.getString("u.prezime");
+			String brTel = rs.getString("u.brojTelefona");
 
-            Long idPlesniNivo = rs.getLong("pn.idPlesniNivo");
-            String opis = rs.getString("pn.opis");
-            int nivo = rs.getInt("pn.nivo");
+			Long idPlesniNivo = rs.getLong("pn.idPlesniNivo");
+			String opis = rs.getString("pn.opis");
+			int nivo = rs.getInt("pn.nivo");
 
-            PlesniNivo pn = new PlesniNivo(idPlesniNivo, opis, nivo);
+			PlesniNivo pn = new PlesniNivo(idPlesniNivo, opis, nivo);
 
-            return new Ucenik(idUcenik, ime, prezime, brTel, pn);
-        }
-        return null;
-    }
+			return new Ucenik(idUcenik, ime, prezime, brTel, pn);
+		}
+		return null;
+	}
 
-    @Override
-    public void postaviId(Long id) {
-        this.idUcenik = id;
-    }
+	@Override
+	public void postaviId(Long id) {
+		this.idUcenik = id;
+	}
 }

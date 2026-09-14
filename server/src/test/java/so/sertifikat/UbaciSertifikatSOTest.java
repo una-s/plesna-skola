@@ -54,18 +54,18 @@ class UbaciSertifikatSOTest {
 	}
 
 	@Test
-	void testPreduslovPraznaInstitucija() {
+	void testPreduslovNullInstitucija() {
 		Sertifikat s = new Sertifikat();
-		s.setInstitucija("");
+		// institucija NIJE setovana → ostaje null
 		Exception ex = assertThrows(Exception.class, () -> so.preduslov(s));
 		assertEquals("Institucija ne sme biti prazna!", ex.getMessage());
 	}
 
 	@Test
-	void testPreduslovPrazanNaziv() {
+	void testPreduslovNullNaziv() {
 		Sertifikat s = new Sertifikat();
 		s.setInstitucija("FON");
-		s.setNaziv("");
+		// naziv NIJE setovan → ostaje null
 		Exception ex = assertThrows(Exception.class, () -> so.preduslov(s));
 		assertEquals("Naziv sertifikata ne sme biti prazan!", ex.getMessage());
 	}

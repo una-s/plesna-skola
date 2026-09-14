@@ -14,6 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import domen.PlesniNivo;
 import domen.Profesor;
 import domen.Ucenik;
 import repository.db.DbRepository;
@@ -67,9 +68,10 @@ class VratiListuUcenikSOTest {
 	void testIzvrsiOperacijuVracaListu() throws Exception {
 		Ucenik u = new Ucenik();
 
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
 		List<Ucenik> lista = new ArrayList<>();
-		lista.add(new Ucenik(1L, "Marko", "Markovic", "064", null));
-		lista.add(new Ucenik(2L, "Ana", "Anic", "065", null));
+		lista.add(new Ucenik(1L, "Marko", "Markovic", "0641234567", pn));
+		lista.add(new Ucenik(2L, "Ana", "Anic", "0651234567", pn));
 
 		expect(repository.getAll(u)).andReturn((List) lista);
 		replay(repository);

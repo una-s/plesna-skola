@@ -54,28 +54,28 @@ class UbaciUcenikSOTest {
 	}
 
 	@Test
-	void testPreduslovPraznoIme() {
+	void testPreduslovNullIme() {
 		Ucenik u = new Ucenik();
-		u.setIme("");
+		// ime NIJE setovano → ostaje null
 		Exception ex = assertThrows(Exception.class, () -> so.preduslov(u));
 		assertEquals("Ime ne sme biti prazno!", ex.getMessage());
 	}
 
 	@Test
-	void testPreduslovPraznoPrezime() {
+	void testPreduslovNullPrezime() {
 		Ucenik u = new Ucenik();
 		u.setIme("Marko");
-		u.setPrezime("");
+		// prezime NIJE setovano → ostaje null
 		Exception ex = assertThrows(Exception.class, () -> so.preduslov(u));
 		assertEquals("Prezime ne sme biti prazno!", ex.getMessage());
 	}
 
 	@Test
-	void testPreduslovPrazanTelefon() {
+	void testPreduslovNullTelefon() {
 		Ucenik u = new Ucenik();
 		u.setIme("Marko");
 		u.setPrezime("Markovic");
-		u.setBrojTelefona("");
+		// brojTelefona NIJE setovan → ostaje null
 		Exception ex = assertThrows(Exception.class, () -> so.preduslov(u));
 		assertEquals("Broj telefona ne sme biti prazan!", ex.getMessage());
 	}

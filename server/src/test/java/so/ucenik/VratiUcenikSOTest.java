@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import domen.PlesniNivo;
 import domen.Profesor;
 import domen.Ucenik;
 import repository.db.DbRepository;
@@ -73,7 +75,8 @@ class VratiUcenikSOTest {
 		Ucenik ulazni = new Ucenik();
 		ulazni.setIdUcenik(1L);
 
-		Ucenik vraceni = new Ucenik(1L, "Marko", "Markovic", "064", null);
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
+		Ucenik vraceni = new Ucenik(1L, "Marko", "Markovic", "0641234567", pn);
 
 		expect(repository.get(ulazni)).andReturn(vraceni);
 		replay(repository);

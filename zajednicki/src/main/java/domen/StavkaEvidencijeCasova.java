@@ -61,21 +61,25 @@ public class StavkaEvidencijeCasova implements ApstraktniDomenskiObjekat {
 	/**
 	 * Kreira objekat klase StavkaEvidencijeCasova sa zadatim vrednostima.
 	 * 
+	 * Poziva set metode za ocenu, datum prisustva i cas uz logicku kontrolu.
+	 * 
 	 * @param evidencijaCasova Evidencija kojoj stavka pripada.
 	 * @param rb Redni broj stavke.
-	 * @param ocena Ocena ucenika na casu.
-	 * @param datumPrisustva Datum prisustva na casu.
+	 * @param ocena Ocena ucenika na casu. Mora biti izmedju 1 i 5.
+	 * @param datumPrisustva Datum prisustva na casu. Ne sme biti null.
 	 * @param napomena Napomena uz stavku.
-	 * @param cas Cas na koji se stavka odnosi.
+	 * @param cas Cas na koji se stavka odnosi. Ne sme biti null.
+	 * @throws java.lang.NullPointerException ako je datum prisustva ili cas null.
+	 * @throws java.lang.IllegalArgumentException ako ocena nije izmedju 1 i 5.
 	 */
 	public StavkaEvidencijeCasova(EvidencijaCasova evidencijaCasova, Long rb, int ocena, Date datumPrisustva,
 			String napomena, Cas cas) {
 		this.evidencijaCasova = evidencijaCasova;
 		this.rb = rb;
-		this.ocena = ocena;
-		this.datumPrisustva = datumPrisustva;
+		setOcena(ocena);
+		setDatumPrisustva(datumPrisustva);
 		this.napomena = napomena;
-		this.cas = cas;
+		setCas(cas);
 	}
 
 	/**
@@ -126,9 +130,13 @@ public class StavkaEvidencijeCasova implements ApstraktniDomenskiObjekat {
 	/**
 	 * Postavlja ocenu na unetu vrednost.
 	 * 
-	 * @param ocena Nova ocena ucenika.
+	 * @param ocena Nova ocena ucenika. Mora biti izmedju 1 i 5.
+	 * @throws java.lang.IllegalArgumentException ako ocena nije izmedju 1 i 5.
 	 */
 	public void setOcena(int ocena) {
+		if (ocena < 1 || ocena > 5) {
+			throw new IllegalArgumentException("Ocena mora biti izmedju 1 i 5!");
+		}
 		this.ocena = ocena;
 	}
 
@@ -144,9 +152,13 @@ public class StavkaEvidencijeCasova implements ApstraktniDomenskiObjekat {
 	/**
 	 * Postavlja datum prisustva na unetu vrednost.
 	 * 
-	 * @param datumPrisustva Novi datum prisustva.
+	 * @param datumPrisustva Novi datum prisustva. Ne sme biti null.
+	 * @throws java.lang.NullPointerException ako je uneti datum prisustva null.
 	 */
 	public void setDatumPrisustva(Date datumPrisustva) {
+		if (datumPrisustva == null) {
+			throw new NullPointerException("Datum prisustva ne sme biti null!");
+		}
 		this.datumPrisustva = datumPrisustva;
 	}
 
@@ -180,9 +192,13 @@ public class StavkaEvidencijeCasova implements ApstraktniDomenskiObjekat {
 	/**
 	 * Postavlja cas na koji se stavka odnosi na unetu vrednost.
 	 * 
-	 * @param cas Novi cas.
+	 * @param cas Novi cas. Ne sme biti null.
+	 * @throws java.lang.NullPointerException ako je uneti cas null.
 	 */
 	public void setCas(Cas cas) {
+		if (cas == null) {
+			throw new NullPointerException("Cas ne sme biti null!");
+		}
 		this.cas = cas;
 	}
 

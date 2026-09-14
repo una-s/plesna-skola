@@ -46,16 +46,22 @@ public class Cas implements ApstraktniDomenskiObjekat {
     /**
      * Kreira objekat klase Cas sa zadatim vrednostima.
      * 
+     * Poziva set metode za naziv, trajanje i stil plesa uz logicku kontrolu.
+     * 
      * @param idCas Jedinstveni identifikator casa.
-     * @param naziv Naziv casa.
-     * @param trajanje Trajanje casa u minutima.
-     * @param stilPlesa Stil plesa koji se izvodi na casu.
+     * @param naziv Naziv casa. Ne sme biti null niti prazan.
+     * @param trajanje Trajanje casa u minutima. Mora biti vece od nule.
+     * @param stilPlesa Stil plesa koji se izvodi na casu. Ne sme biti
+     * null niti prazan.
+     * @throws java.lang.NullPointerException ako je naziv ili stil plesa null.
+     * @throws java.lang.IllegalArgumentException ako je naziv ili stil plesa
+     * prazan, ili ako je trajanje manje ili jednako nuli.
      */
     public Cas(Long idCas, String naziv, int trajanje, String stilPlesa) {
         this.idCas = idCas;
-        this.naziv = naziv;
-        this.trajanje = trajanje;
-        this.stilPlesa = stilPlesa;
+        setNaziv(naziv);
+        setTrajanje(trajanje);
+        setStilPlesa(stilPlesa);
     }
 
     /**
@@ -88,9 +94,17 @@ public class Cas implements ApstraktniDomenskiObjekat {
     /**
      * Postavlja naziv casa na unetu vrednost.
      * 
-     * @param naziv Novi naziv casa.
+     * @param naziv Novi naziv casa. Ne sme biti null niti prazan.
+     * @throws java.lang.NullPointerException ako je uneti naziv null.
+     * @throws java.lang.IllegalArgumentException ako je uneti naziv prazan.
      */
     public void setNaziv(String naziv) {
+        if (naziv == null) {
+            throw new NullPointerException("Naziv ne sme biti null!");
+        }
+        if (naziv.isEmpty()) {
+            throw new IllegalArgumentException("Naziv ne sme biti prazan!");
+        }
         this.naziv = naziv;
     }
 
@@ -106,9 +120,14 @@ public class Cas implements ApstraktniDomenskiObjekat {
     /**
      * Postavlja trajanje casa na unetu vrednost.
      * 
-     * @param trajanje Novo trajanje casa u minutima.
+     * @param trajanje Novo trajanje casa u minutima. Mora biti vece od nule.
+     * @throws java.lang.IllegalArgumentException ako je trajanje manje
+     * ili jednako nuli.
      */
     public void setTrajanje(int trajanje) {
+        if (trajanje <= 0) {
+            throw new IllegalArgumentException("Trajanje mora biti vece od nule!");
+        }
         this.trajanje = trajanje;
     }
 
@@ -124,9 +143,17 @@ public class Cas implements ApstraktniDomenskiObjekat {
     /**
      * Postavlja stil plesa na unetu vrednost.
      * 
-     * @param stilPlesa Novi stil plesa.
+     * @param stilPlesa Novi stil plesa. Ne sme biti null niti prazan.
+     * @throws java.lang.NullPointerException ako je uneti stil plesa null.
+     * @throws java.lang.IllegalArgumentException ako je uneti stil plesa prazan.
      */
     public void setStilPlesa(String stilPlesa) {
+        if (stilPlesa == null) {
+            throw new NullPointerException("Stil plesa ne sme biti null!");
+        }
+        if (stilPlesa.isEmpty()) {
+            throw new IllegalArgumentException("Stil plesa ne sme biti prazan!");
+        }
         this.stilPlesa = stilPlesa;
     }
 
@@ -222,7 +249,7 @@ public class Cas implements ApstraktniDomenskiObjekat {
             String nazivCasa = rs.getString("c.naziv");
             int trajanjeCasa = rs.getInt("c.trajanje");
             String stilPlesaCasa = rs.getString("c.stilPlesa");
-            return new Cas(casId, naziv, trajanje, stilPlesa);
+            return new Cas(casId, nazivCasa, trajanjeCasa, stilPlesaCasa);
         }
         return null;
     }

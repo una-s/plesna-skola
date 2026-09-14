@@ -76,8 +76,9 @@ class PretraziUcenikSOTest {
 		Ucenik u = new Ucenik();
 		u.setIme("Marko");
 
+		PlesniNivo pn = new PlesniNivo(1L, "Pocetni", 1);
 		List<Ucenik> lista = new ArrayList<>();
-		lista.add(new Ucenik(1L, "Marko", "Markovic", "064", null));
+		lista.add(new Ucenik(1L, "Marko", "Markovic", "0641234567", pn));
 
 		expect(repository.getAll(u)).andReturn((List) lista);
 		replay(repository);

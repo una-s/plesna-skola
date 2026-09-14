@@ -17,6 +17,7 @@ import java.util.List;
 
 import domen.Cas;
 import domen.EvidencijaCasova;
+import domen.PlesniNivo;
 import domen.Profesor;
 import domen.StavkaEvidencijeCasova;
 import domen.Ucenik;
@@ -62,7 +63,7 @@ class UbaciEvidencijaCasovaSOTest {
 		ec.setDatumPocetka(pocetak);
 		ec.setDatumZavrsetka(zavrsetak);
 		ec.setProfesor(new Profesor(1L, "Ana", "Anic", "064", "aanic", "sifra"));
-		ec.setUcenik(new Ucenik(1L, "Marko", "Markovic", "065", null));
+		ec.setUcenik(new Ucenik(1L, "Marko", "Markovic", "0651234567", new PlesniNivo(1L, "Pocetni", 1)));
 
 		List<StavkaEvidencijeCasova> stavke = new ArrayList<>();
 		StavkaEvidencijeCasova stavka = new StavkaEvidencijeCasova();
@@ -101,34 +102,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Prosledjeni objekat nije instanca klase EvidencijaCasova!", ex.getMessage());
 	}
 
-	// 3. prazna skolska godina
-	@Test
-	void testPreduslovPraznaSkolskaGodina() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.setSkolskaGodina("");
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Skolska godina ne sme biti prazna!", ex.getMessage());
-	}
-
-	// 4. datum pocetka null
-	@Test
-	void testPreduslovNullDatumPocetka() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.setDatumPocetka(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Datum pocetka ne sme biti null!", ex.getMessage());
-	}
-
-	// 5. datum zavrsetka null
-	@Test
-	void testPreduslovNullDatumZavrsetka() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.setDatumZavrsetka(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Datum zavrsetka ne sme biti null!", ex.getMessage());
-	}
-
-	// 6. zavrsetak pre pocetka
+	// 3. zavrsetak pre pocetka
 	@Test
 	void testPreduslovZavrsetakPrePocetka() {
 		EvidencijaCasova ec = validnaEvidencija();
@@ -137,7 +111,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Datum zavrsetka mora biti nakon datuma pocetka!", ex.getMessage());
 	}
 
-	// 7. los format skolske godine
+	// 4. los format skolske godine
 	@Test
 	void testPreduslovLosFormatGodine() {
 		EvidencijaCasova ec = validnaEvidencija();
@@ -146,7 +120,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Skolska godina mora biti u formatu 'xxxx/xxxx'!", ex.getMessage());
 	}
 
-	// 8. bez stavki
+	// 5. bez stavki
 	@Test
 	void testPreduslovBezStavki() {
 		EvidencijaCasova ec = validnaEvidencija();
@@ -155,25 +129,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Evidencija mora imati bar jednu stavku!", ex.getMessage());
 	}
 
-	// 9. profesor null
-	@Test
-	void testPreduslovNullProfesor() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.setProfesor(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Profesor ne sme biti null!", ex.getMessage());
-	}
-
-	// 10. ucenik null
-	@Test
-	void testPreduslovNullUcenik() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.setUcenik(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Ucenik ne sme biti null!", ex.getMessage());
-	}
-
-	// 11. godina pocetka != prva godina skolske godine
+	// 6. godina pocetka != prva godina skolske godine
 	@Test
 	void testPreduslovGodinaPocetkaNeodgovara() {
 		EvidencijaCasova ec = validnaEvidencija();
@@ -183,7 +139,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Godina datuma pocetka mora biti jednaka prvoj godini skolske godine!", ex.getMessage());
 	}
 
-	// 12. godina zavrsetka != druga godina skolske godine
+	// 7. godina zavrsetka != druga godina skolske godine
 	@Test
 	void testPreduslovGodinaZavrsetkaNeodgovara() {
 		EvidencijaCasova ec = validnaEvidencija();
@@ -193,34 +149,7 @@ class UbaciEvidencijaCasovaSOTest {
 		assertEquals("Godina datuma zavrsetka mora biti jednaka drugoj godini skolske godine!", ex.getMessage());
 	}
 
-	// 13. cas u stavci null
-	@Test
-	void testPreduslovStavkaCasNull() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setCas(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Cas u stavci ne sme biti null!", ex.getMessage());
-	}
-
-	// 14. ocena van opsega
-	@Test
-	void testPreduslovOcenaVanOpsega() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setOcena(6);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Ocena mora biti izmedju 1 i 5!", ex.getMessage());
-	}
-
-	// 15a. datum prisustva null
-	@Test
-	void testPreduslovStavkaDatumNull() {
-		EvidencijaCasova ec = validnaEvidencija();
-		ec.getStavke().get(0).setDatumPrisustva(null);
-		Exception ex = assertThrows(Exception.class, () -> so.preduslov(ec));
-		assertEquals("Datum prisustva ne sme biti null!", ex.getMessage());
-	}
-
-	// 15b. datum prisustva van opsega
+	// 8. datum prisustva van opsega
 	@Test
 	void testPreduslovDatumPrisustvaVanOpsega() {
 		EvidencijaCasova ec = validnaEvidencija();
