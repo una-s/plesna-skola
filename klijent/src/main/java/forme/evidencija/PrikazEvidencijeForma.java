@@ -225,25 +225,29 @@ public class PrikazEvidencijeForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonKreirajEvidencijuActionPerformed
 
     private void jButtonPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPretraziActionPerformed
-        try {
-            Profesor p = (Profesor) jComboBoxProfesor.getSelectedItem();
-            Ucenik u = (Ucenik) jComboBoxUcenik.getSelectedItem();
-            String skolskaGodina = jTextFieldSkolskaGodina.getText().trim();
+    	 try {
+    	        Profesor p = (Profesor) jComboBoxProfesor.getSelectedItem();
+    	        Ucenik u = (Ucenik) jComboBoxUcenik.getSelectedItem();
+    	        String skolskaGodina = jTextFieldSkolskaGodina.getText().trim();
 
-            EvidencijaCasova e = new EvidencijaCasova();
-            e.setProfesor(p);
-            e.setUcenik(u);
-            if (!skolskaGodina.isEmpty()) {
-                e.setSkolskaGodina(skolskaGodina);
-            }
+    	        EvidencijaCasova e = new EvidencijaCasova();
+    	        if (p != null) {                       // ← setuj SAMO ako je izabran
+    	            e.setProfesor(p);
+    	        }
+    	        if (u != null) {                       // ← setuj SAMO ako je izabran
+    	            e.setUcenik(u);
+    	        }
+    	        if (!skolskaGodina.isEmpty()) {
+    	            e.setSkolskaGodina(skolskaGodina);
+    	        }
 
-            List<EvidencijaCasova> evidencije = ClientController.getInstance().pretraziEvidencijaCasova(e);
-            ModelTabeleEvidencijaCasova mte = new ModelTabeleEvidencijaCasova(evidencije);
-            jTableEvidencija.setModel(mte);
-            JOptionPane.showMessageDialog(this, "Sistem je nasao evidencije casova po zadatim kriterijumima!", "Uspeh!", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Greska!", JOptionPane.ERROR_MESSAGE);
-        }
+    	        List<EvidencijaCasova> evidencije = ClientController.getInstance().pretraziEvidencijaCasova(e);
+    	        ModelTabeleEvidencijaCasova mte = new ModelTabeleEvidencijaCasova(evidencije);
+    	        jTableEvidencija.setModel(mte);
+    	        JOptionPane.showMessageDialog(this, "Sistem je nasao evidencije casova po zadatim kriterijumima!", "Uspeh!", JOptionPane.INFORMATION_MESSAGE);
+    	    } catch (Exception ex) {
+    	        JOptionPane.showMessageDialog(this, ex.getMessage(), "Greska!", JOptionPane.ERROR_MESSAGE);
+    	    }
     }//GEN-LAST:event_jButtonPretraziActionPerformed
 
     private void jButtonPrikaziSveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrikaziSveActionPerformed

@@ -224,26 +224,31 @@ public class PrikazUcenikForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPretraziActionPerformed
-        try {
-            String ime = jTextFieldIme.getText().trim();
-            String prezime = jTextFieldPrezime.getText().trim();
-            PlesniNivo pn = (PlesniNivo) jComboBoxPlesniNivo.getSelectedItem();
+    	 try {
+    	        String ime = jTextFieldIme.getText().trim();
+    	        String prezime = jTextFieldPrezime.getText().trim();
+    	        PlesniNivo pn = (PlesniNivo) jComboBoxPlesniNivo.getSelectedItem();
 
-            Ucenik u = new Ucenik();
-            u.setIme(ime);
-            u.setPrezime(prezime);
-            u.setPlesniNivo(pn);
+    	        Ucenik u = new Ucenik();
+    	        if (!ime.isEmpty()) {
+    	            u.setIme(ime);
+    	        }
+    	        if (!prezime.isEmpty()) {
+    	            u.setPrezime(prezime);
+    	        }
+    	        if (pn != null) {
+    	            u.setPlesniNivo(pn);
+    	        }
 
-            List<Ucenik> ucenici = ClientController.getInstance().pretraziUcenik(u);
+    	        List<Ucenik> ucenici = ClientController.getInstance().pretraziUcenik(u);
 
-            ModelTabeleUcenik mtu = new ModelTabeleUcenik(ucenici);
-            jTableUcenici.setModel(mtu);
+    	        ModelTabeleUcenik mtu = new ModelTabeleUcenik(ucenici);
+    	        jTableUcenici.setModel(mtu);
 
-            JOptionPane.showMessageDialog(this, "Sistem je nasao ucenike po zadatim kriterijumima!", "Uspeh!", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Greska!", JOptionPane.ERROR_MESSAGE);
-        }
+    	        JOptionPane.showMessageDialog(this, "Sistem je nasao ucenike po zadatim kriterijumima!", "Uspeh!", JOptionPane.INFORMATION_MESSAGE);
+    	    } catch (Exception ex) {
+    	        JOptionPane.showMessageDialog(this, ex.getMessage(), "Greska!", JOptionPane.ERROR_MESSAGE);
+    	    }
     }//GEN-LAST:event_jButtonPretraziActionPerformed
 
     private void jButtonPromeniUcenikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPromeniUcenikaActionPerformed
